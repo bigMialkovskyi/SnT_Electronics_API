@@ -6,9 +6,7 @@ const middlewares = require('../../../middlewares')
 const router = Router()
 
 // объявление роутов и подключение контролеров
-router.post('/users/register', controllers.register)
-router.post('/users/login', controllers.login)
-router.post('/devices/register', controllers.deviceRegister)
-router.post('/device/login', controllers.deviceLogin)
+router.get('/get/all', controllers.getAllDevices)
+router.get('/get/:deviceId', middlewares.verifyAuth.user, controllers.getOneDevice)
 
 module.exports = router

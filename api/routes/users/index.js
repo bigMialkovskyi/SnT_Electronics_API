@@ -6,7 +6,6 @@ const middlewares = require('../../../middlewares')
 const router = Router()
 
 // объявление роутов и подключение контролеров
-router.get('/get/all', controllers.getAllUsers)
-router.get('/get/:userId', controllers.getOneUser)
+router.get('/get', controllers.getUser)
 
 module.exports = router

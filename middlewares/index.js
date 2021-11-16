@@ -1,3 +1,6 @@
 module.exports = {
-  verifyAuth: require('./verifyAuth')
+  verifyAuth: {
+    user: require('./verifyAuth/user'),
+    device: require('./verifyAuth/device'),
+  }
 }

@@ -1,4 +1,9 @@
+const login = require('./login');
+
 module.exports = {
-  register: require('./register'),
-  login: require('./login')
+  deviceRegister: require('./deviceRegister'),
+  deviceLogin: require('./deviceLogin'),
+  login: require('./login'),
+  register: require('./register')
+
 }

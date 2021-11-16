@@ -10,7 +10,7 @@ module.exports = async (req, res) => {
 		if (!airQuality) return res.status(400).send({ success: false, error: '"airQuality" is required' })
 		if (!humidity) return res.status(400).send({ success: false, error: '"humidity" is required' })
 
-		const sensorsInfo = new db.senors({
+		const sensorsInfo = new db.sensors({
 			_id: Types.ObjectId(),
 			temperature,
 			airQuality,

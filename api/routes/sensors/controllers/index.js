@@ -1,3 +1,4 @@
 module.exports = {
-    updateInfo: require('./updateInfo')
+    updateInfo: require('./updateInfo'),
+    getInfo: require('./getInfo')
 }

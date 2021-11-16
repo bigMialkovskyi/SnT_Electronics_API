@@ -1,12 +1,3 @@
 node_modules/
 .env
 package-lock.json
-# file system
-static/uploads/temp/*
-!static/uploads/temp/.gitkeep 
-
-static/uploads/posts/*
-!static/uploads/posts/.gitkeep 
-
-static/uploads/avatars/*
-!static/uploads/avatars/.gitkeep 

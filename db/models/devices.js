@@ -1,6 +1,3 @@
-const mongoosePaginate = require('mongoose-paginate-v2')
-
-
 module.exports = function (mongoose, connection) {
   // создание модели представляения пользователя в БД
   const schema = new mongoose.Schema({
@@ -16,8 +13,6 @@ module.exports = function (mongoose, connection) {
     },
 
   }, { timestamps: true })
-
-  schema.plugin(mongoosePaginate)
 
   // возвращаем модель
   return connection.model('devices', schema)

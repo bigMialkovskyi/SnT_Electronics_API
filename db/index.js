@@ -15,15 +15,7 @@ module.exports = () => {
 
   return {
     connection,
-<<<<<<< HEAD
     devices: require('./models/devices')(mongoose, connection),
     sensors: require('./models/sensors')(mongoose, connection)
-=======
-    users: require('./models/users')(mongoose, connection),
-    posts: require('./models/posts')(mongoose, connection),
-    comments: require('./models/comments')(mongoose, connection),
-    likes: require('./models/likes')(mongoose, connection),
-    files: require('./models/files')(mongoose, connection)
->>>>>>> b2e53aabf1cacf0faf3345e0595cadbde2076011
   }
 }

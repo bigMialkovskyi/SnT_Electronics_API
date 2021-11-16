@@ -1,5 +1,4 @@
 require('dotenv').config()
-const { Types } = require('mongoose')
 const bcrypt = require('bcrypt')
 
 

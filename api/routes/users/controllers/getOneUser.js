@@ -4,7 +4,7 @@ module.exports = async (req, res) => {
     const userId = req.params.userId
 
     // проверяем что пользователь есть в нашей БД
-    const user = await db.users.findOne({ _id: userId }).select('_id login avatar description')
+    const user = await db.users.findOne({ _id: userId })
     if (!user) return res.status(400).send({ success: false, message: 'user not exist' })
     
     res.send({ success: true, message: 'user received', user })

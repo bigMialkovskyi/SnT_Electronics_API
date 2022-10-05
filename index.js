@@ -18,4 +18,3 @@ app.use(morgan('dev'))
 api(app)
 
 app.listen(process.env.PORT, process.env.HOST, () => console.log(`App "${process.env.NAME}" listen: ${process.env.HOST}:${process.env.PORT}`))
-

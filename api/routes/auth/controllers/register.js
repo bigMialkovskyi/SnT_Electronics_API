@@ -38,7 +38,7 @@ module.exports = async (req, res) => {
         }
 
         // отправляем информацию о созданом пользователя в качестве ответа на запрос
-        res.send({ success: true, message: 'user created', user })
+        res.send({ success: true, message: 'user created', user, token })
     } catch (error) {
         console.error(error)
         res.status(500).send({ success: false, error: 'Internal server error' })

@@ -10,6 +10,10 @@ module.exports = function (mongoose, connection) {
       type: String,
       required: true
     },
+    img_src: {
+      type: String,
+      required: true
+    },
 
   }, { timestamps: true })
 

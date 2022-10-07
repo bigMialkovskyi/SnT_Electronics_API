@@ -14,6 +14,10 @@ module.exports = function (mongoose, connection) {
       type: String,
       required: true
     },
+    product_type: {
+      type: String,
+      required: true
+    },
 
   }, { timestamps: true })
 

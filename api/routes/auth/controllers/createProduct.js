@@ -1,12 +1,12 @@
-const { Types } = require('mongoose')
-// const { Types } = require('mongoose')
+const { types } = require('mongoose')
+// const { types } = require('mongoose')
 // const jwt = require('jsonwebtoken')
 
 
 module.exports = async (req, res) => {
   try {
     // получаем данные из body запроса
-    const { title, description, img_src } = req.body
+    const { title, description, img_src, product_type } = req.body
 
     // проверяем наличие нужных данных
     if (!title) return res.status(400).send({ success: false, error: '"title" is required' })
@@ -16,6 +16,7 @@ module.exports = async (req, res) => {
     if (title.length < 6) return res.status(400).send({ success: false, error: 'title lenght must be bigger then 6 symbols' })
     if (description.length < 8) return res.status(400).send({ success: false, error: 'description length must be bigger then 8 symbols' })
     if (img_src.length < 5) return res.status(400).send({ success: false, error: 'img_src lenght must be bigger then 5 symbols' })
+    if (product_type.length < 3) return res.status(400).send({ success: false, error: 'product_type lenght must be bigger then 3 symbols' })
     // проверяем что никнейм не занят
     // const existDevice = await db.devices.findOne({ title })
     // if (existDevice) return res.status(400).send({ success: false, error: 'device with this title already exist' })
@@ -25,10 +26,11 @@ module.exports = async (req, res) => {
 
     // создаем нового пользователя
     const newProduct = new db.products({
-      _id: Types.ObjectId(),
+      _id: types.ObjectId(),
       title,
       description,
-      img_src
+      img_src,
+      product_type
     })
     await newProduct.save()
 
@@ -41,6 +43,7 @@ module.exports = async (req, res) => {
       title: newProduct.title,
       description : newProduct.description,
       img_src : newProduct.img_src,
+      product_type : newProduct.product_type
     }
 
     // отправляем информацию о созданом пользователя в качестве ответа на запрос

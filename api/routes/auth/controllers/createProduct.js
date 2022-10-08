@@ -1,4 +1,4 @@
-const { types } = require('mongoose')
+const { Types } = require('mongoose')
 // const { types } = require('mongoose')
 // const jwt = require('jsonwebtoken')
 
@@ -26,7 +26,7 @@ module.exports = async (req, res) => {
 
     // создаем нового пользователя
     const newProduct = new db.products({
-      _id: types.ObjectId(),
+      _id: Types.ObjectId(),
       title,
       description,
       img_src,

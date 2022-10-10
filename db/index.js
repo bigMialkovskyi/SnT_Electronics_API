@@ -1,7 +1,8 @@
 const mongoose = require('mongoose')
 
 require("dotenv").config() // получение переменных среды
-const mongoURI = `${process.env.DB_HOST}${process.env.DB_NAME}`
+const mongoURI = `${process.env.DB_HOST}`
+// const mongoURI = `${process.env.DB_HOST}${process.env.DB_NAME}`
 const connection = mongoose.createConnection(mongoURI) // подключение к БД
 
 // слушаем события связанные с работой БД

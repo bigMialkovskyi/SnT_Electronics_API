@@ -2,6 +2,8 @@ const express = require('express')
 const { json, urlencoded } = require('express')
 const cors = require('cors')
 const morgan = require('morgan')
+let bodyParser = require('body-parser')
+let fs = require('fs');
 
 global.store = require('./store')
 global.db = require('./db')()

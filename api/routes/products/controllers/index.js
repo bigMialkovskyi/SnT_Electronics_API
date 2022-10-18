@@ -1,4 +1,5 @@
 module.exports = {
   getOneProduct: require('./getOneProduct'),
-  getAllProducts: require('./getAllProducts')
+  getAllProducts: require('./getAllProducts'),
+  deleteProduct: require('./deleteProduct')
 }

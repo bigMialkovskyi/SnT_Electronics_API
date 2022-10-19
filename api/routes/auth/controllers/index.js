@@ -5,6 +5,5 @@ module.exports = {
   deviceLogin: require('./deviceLogin'),
   login: require('./login'),
   register: require('./register'),
-  createProduct: require('./createProduct')
-
+  createProduct: require('./createProduct'),
 }

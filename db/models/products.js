@@ -10,9 +10,10 @@ module.exports = function (mongoose, connection) {
       type: String,
       required: true
     },
-    img_src: {
+    img: {
       type: String,
-      required: true
+      data: Buffer,
+      // required: true
     },
     product_type: {
       type: String,

@@ -1,5 +1,4 @@
 const mongoose = require('mongoose')
-const productImages = require('./models/productImages')
 
 require("dotenv").config() // получение переменных среды
 const mongoURI = `${process.env.DB_HOST}`
@@ -21,6 +20,5 @@ module.exports = () => {
     sensors: require('./models/sensors')(mongoose, connection),
     users: require('./models/users')(mongoose, connection),
     products: require('./models/products')(mongoose, connection),
-    productImages: require('./models/productImages')(mongoose, connection)
   }
 }

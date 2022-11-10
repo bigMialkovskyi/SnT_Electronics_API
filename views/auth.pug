@@ -1,0 +1,20 @@
+extends template.pug 
+block main
+  div 
+    h5 Hello #{name}
+  #app  {{message}}
+  script.
+    const { createApp } = Vue
+    createApp({
+      data() {
+        return {
+          name: '#{name}',
+          city: '#{city}'
+        }
+      },
+      template: '<h1>OK, let`s go {{city}} #{city}</h1>'
+    }).mount('#app')
+
+block scripts
+  script(src="https://unpkg.com/vue@3/dist/vue.global.js")
+  script(src="js/index.js")

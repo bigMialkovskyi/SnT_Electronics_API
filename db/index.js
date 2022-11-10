@@ -19,7 +19,6 @@ module.exports = () => {
     devices: require('./models/devices')(mongoose, connection),
     sensors: require('./models/sensors')(mongoose, connection),
     users: require('./models/users')(mongoose, connection),
-    products: require('./models/products')(mongoose, connection)
-
+    products: require('./models/products')(mongoose, connection),
   }
 }

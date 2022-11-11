@@ -2,11 +2,8 @@ const express = require('express')
 const { json, urlencoded } = require('express')
 const cors = require('cors')
 const morgan = require('morgan')
-<<<<<<< HEAD
 const path = require('path')
-=======
 let bodyParser = require('body-parser')
->>>>>>> 678c2d16fc3580cc6cc0b753489fe4cca84c81fd
 
 global.store = require('./store')
 global.db = require('./db')()

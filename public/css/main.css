@@ -5,3 +5,16 @@ h6 {
 h5 {
   color: red;
 }
+
+.form {
+  display: flex;
+  flex-direction: column;  
+  background-color: green;
+  height: 300px;
+  justify-content: space-between;
+  padding: 15px 25px;
+}
+
+.submit-btn{
+  width: 100px;
+}

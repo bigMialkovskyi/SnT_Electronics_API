@@ -19,12 +19,8 @@
     "mongoose": "^6.0.12",
     "mongoose-paginate-v2": "^1.4.2",
     "morgan": "^1.10.0",
-<<<<<<< HEAD
+    "multer": "^1.4.5-lts.1",
     "nodemon": "^2.0.14",
     "pug": "^3.0.2"
-=======
-    "multer": "^1.4.5-lts.1",
-    "nodemon": "^2.0.14"
->>>>>>> 678c2d16fc3580cc6cc0b753489fe4cca84c81fd
   }
 }

@@ -23,10 +23,19 @@ api(app)
 app.set('views', './views');
 app.set('view engine', 'pug');
 
-app.get('/', (req, res) => {
-  res.render('auth', {
+app.get('/admin-register', (req, res) => {
+  res.render('register', {
     name: "vlad",
     city: "Las Vegas"
   });
 });
+
+app.get('/admin-login', (req, res) => {
+  res.render('login', {});
+});
+
+app.get('/home', (req, res) => {
+  res.render('home', {});
+});
+
 app.listen(process.env.PORT, process.env.HOST, () => console.log(`App "${process.env.NAME}" listen: ${process.env.HOST}:${process.env.PORT}`))

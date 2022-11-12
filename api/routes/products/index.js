@@ -6,7 +6,7 @@ const controllers = require('./controllers')
 const middlewares = require('../../../middlewares')
 
 const storage = multer.diskStorage({
-  destination: (req, file, cb) => cb(null, 'static/uploads/posts/'),
+  destination: (req, file, cb) => cb(null, 'static/uploads'),
   filename: (req, file, cb) => cb(null, uuid.v4() + '.' + file.originalname.split('.')[1])
 })
 
@@ -26,9 +26,9 @@ const upload = multer({
 const router = Router()
 
 // объявление роутов и подключение контролеров
+router.post('/create', upload.single('mediaFile'), controllers.createProduct)
 router.get('/get/all', controllers.getAllProducts)
 router.get('/get/:productId', controllers.getOneProduct)
 router.delete('/delete/:productId', controllers.deleteProduct)
-router.post('/create', controllers.createProduct)
 
 module.exports = router

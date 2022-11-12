@@ -106,20 +106,23 @@ body {
 
 .container {
   height: calc(100% - 120px);
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 15px 25px;
 }
 
 .form {
   height: 100%;
   display: flex;
   flex-direction: column;
-  /* background-color: green; */
-  /* height: 300px; */
   justify-content: space-between;
-  padding: 15px 25px;
+  /* padding: 15px 25px; */
 }
 
 .form-desc {
-  font-size: 24px;
+  font-size: 16px;
   margin-left: auto;
   margin-right: auto;
 }
@@ -134,12 +137,8 @@ body {
 .submit-btn {
   width: 200px;
   height: 50px;
+  margin: 20px 0;
   border-radius: 50px;
   background-color: #45a049;
 
 }
-
-/* .footer {
-  height: 60px;
-  background-color: #87cefa;
-} */

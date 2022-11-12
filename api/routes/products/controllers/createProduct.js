@@ -7,8 +7,13 @@ var path = require('path');
 
 module.exports = async (req, res) => {
   try {
+    //get file from req
+    const mediaFile = req.file
     // получаем данные из body запроса
     const { title, description, img_name, product_type } = req.body
+    
+    // проверяем наличие нужных данных
+    if (!mediaFile) return res.status(400).send({ success: false, error: '"media" is required' })
 
     // проверяем наличие нужных данных
     if (!title) return res.status(400).send({ success: false, error: '"title" is required' })

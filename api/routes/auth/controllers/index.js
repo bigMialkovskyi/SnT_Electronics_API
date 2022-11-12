@@ -5,4 +5,6 @@ module.exports = {
   deviceLogin: require('./deviceLogin'),
   login: require('./login'),
   register: require('./register'),
+  adminLogin: require('./adminLogin'),
+  adminRegister: require('./adminRegister'),
 }

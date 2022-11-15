@@ -1,3 +1,4 @@
 module.exports = {
-  common: require('./common')
+  common: require('./common'),
+  files: require('./files')
 }

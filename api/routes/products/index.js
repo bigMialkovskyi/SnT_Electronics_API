@@ -26,7 +26,8 @@ const upload = multer({
 const router = Router()
 
 // объявление роутов и подключение контролеров
-router.post('/create', upload.single('mediaFile'), controllers.createProduct)
+router.post('/create', [middlewares.verifyAuth.admin, upload.single('mediaFile')], controllers.createProduct)
+// router.post('/create', middlewares.verifyAuth.admin, controllers.createProduct)
 router.get('/get/all', controllers.getAllProducts)
 router.get('/get/:productId', controllers.getOneProduct)
 router.delete('/delete/:productId', controllers.deleteProduct)

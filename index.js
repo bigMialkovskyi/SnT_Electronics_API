@@ -3,7 +3,9 @@ const { json, urlencoded } = require('express')
 const cors = require('cors')
 const morgan = require('morgan')
 const path = require('path')
-let bodyParser = require('body-parser')
+const bodyParser = require('body-parser')
+const cookieParser = require('cookie-parser')
+
 
 global.store = require('./store')
 global.db = require('./db')()
@@ -16,6 +18,7 @@ app.use(cors())
 app.use(urlencoded({ extended: true }))
 app.use(json())
 app.use(morgan('dev'))
+app.use(cookieParser())
 app.use(express.static(path.join(__dirname, "public")));
 
 api(app)

@@ -21,5 +21,6 @@ module.exports = () => {
     users: require('./models/users')(mongoose, connection),
     products: require('./models/products')(mongoose, connection),
     admins: require('./models/admins')(mongoose, connection),
+    files: require('./models/files')(mongoose, connection)
   }
 }

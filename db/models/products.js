@@ -10,10 +10,10 @@ module.exports = function (mongoose, connection) {
       type: String,
       required: true
     },
-    img: {
-      type: String,
-      data: Buffer,
-      // required: true
+    media: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'files',
+      required: true
     },
     product_type: {
       type: String,

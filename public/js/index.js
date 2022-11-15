@@ -25,7 +25,7 @@ function loginAdmin() {
       const objects = JSON.parse(this.responseText);
       if (objects['success'] == true) {
         console.log(objects['message'])
-        document.cookie = "jwt="+objects['token'];
+        document.cookie = "token=" + objects['token'];
         Swal.fire({
           text: objects['message'],
           icon: 'success',
@@ -44,4 +44,34 @@ function loginAdmin() {
       }
     }
   };
+}
+
+function getData() {
+  const productTitle = document.getElementById("productTitle").value;
+  const productDesc = document.getElementById("productDesc").value;
+  const productType = document.getElementById("productType").value;
+  const productImg = document.getElementById("productImg").value;
+
+  console.log(productTitle, productDesc, productType, productImg)
+  console.log(typeof (productImg))
+}
+
+function newFunc() {
+  let result;
+  let input = document.getElementsByTagName('input')[0];
+  input.oninput = (e) => {
+    console.log(e);
+    let file = e.target.files[0];
+    const reader = new FileReader();
+    reader.onload = (evt) => {
+      console.log(evt.target.result);
+      result = evt.target.result;
+      const xhr = new XMLHttpRequest();
+      const url = 'http://localhost:3000/events';
+
+      xhr.open('POST', url);
+      xhr.send(result);
+    };
+    reader.readAsDataURL(file);
+  }
 }

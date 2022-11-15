@@ -10,29 +10,44 @@ module.exports = async (req, res) => {
     //get file from req
     const mediaFile = req.file
     // получаем данные из body запроса
-    const { title, description, img_name, product_type } = req.body
-    
+    // const { title, description, img_name, product_type } = req.body
+    const { title, description, product_type } = req.body
+    //достаем пользователся из запроса 
+    const userId = req.user._id
+
+
     // проверяем наличие нужных данных
     if (!mediaFile) return res.status(400).send({ success: false, error: '"media" is required' })
+
+    // записываем данные о файле в БД
+    const file = await store.files.actions.SAVE_FILE(mediaFile, userId)
 
     // проверяем наличие нужных данных
     if (!title) return res.status(400).send({ success: false, error: '"title" is required' })
     if (!description) return res.status(400).send({ success: false, error: '"description" is required' })
-    if (!img_name) return res.status(400).send({ success: false, error: '"img_src" is required' })
+    // if (!img_name) return res.status(400).send({ success: false, error: '"img_src" is required' })
     // проверяем валидность данных
     if (title.length < 6) return res.status(400).send({ success: false, error: 'title lenght must be bigger then 6 symbols' })
     if (description.length < 8) return res.status(400).send({ success: false, error: 'description length must be bigger then 8 symbols' })
-    if (img_name.length < 3) return res.status(400).send({ success: false, error: 'img_src lenght must be bigger then 3 symbols' })
+    // if (img_name.length < 3) return res.status(400).send({ success: false, error: 'img_src lenght must be bigger then 3 symbols' })
     if (product_type.length < 3) return res.status(400).send({ success: false, error: 'product_type lenght must be bigger then 3 symbols' })
 
-    const img = fs.readFileSync(path.join(__dirname + '../../../../../uploads/' + img_name))
+    // создаем пустой объект для добавления поста в БД
+    const postData = {}
+    postData.media = file._id
+    if (description) {
+      if (description.length > 500) return res.status(400).send({ success: false, error: 'description lenght must be less then 500 symbols' })
+      postData.description = description
+    }
+    // const img = fs.readFileSync(path.join(__dirname + '../../../../../uploads/' + img_name))
     // создаем новий продукт
     const newProduct = new db.products({
       _id: Types.ObjectId(),
       title,
       description,
-      img,
-      product_type
+      // img,
+      product_type,
+      ...postData
     })
     await newProduct.save()
 
@@ -41,7 +56,8 @@ module.exports = async (req, res) => {
       _id: newProduct._id,
       title: newProduct.title,
       description: newProduct.description,
-      img: newProduct.img,
+      // img: newProduct.img,
+      media: newProduct.media,
       product_type: newProduct.product_type
     }
 

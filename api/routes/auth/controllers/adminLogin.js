@@ -11,24 +11,24 @@ module.exports = async (req, res) => {
         if (!password) return res.status(400).send({ success: false, error: '"password" is required' })
 
         // находим пользователя в БД
-        const user = await db.users.findOne({ login })
-        if (!user) return res.send({ success: false, error: 'user with this identity not exist' })
+        const admin = await db.admins.findOne({ login })
+        if (!admin) return res.send({ success: false, error: 'admin with this identity not exist' })
 
         // проверяем пароль
-        const comparePasswordResult = await store.common.actions.CHECK_ENCRYPTED_PASSWORD(password, user.password)
+        const comparePasswordResult = await store.common.actions.CHECK_ENCRYPTED_PASSWORD(password, admin.password)
         if (!comparePasswordResult) return res.status(401).send({ success: false, error: 'Incorrect password' })
 
         // создаем токен доступа для созданного пользователя
-        const token = await jwt.sign({ _id: user._id }, store.common.getters.GET_SECRET_KEY())
+        const token = await jwt.sign({ _id: admin._id }, store.common.getters.GET_SECRET_KEY())
 
         // из записи пользователя в БД формируем объект пользователя который будет показывать
-        const userForResponse = {
-            _id: user._id,
-            identity: user.identity,
+        const adminForResponse = {
+            _id: admin._id,
+            identity: admin.identity,
         }
 
         // отправляем информацию о авторизированом пользователя в качестве ответа на запрос
-        res.send({ success: true, message: 'user logined', user: userForResponse, token })
+        res.send({ success: true, message: 'admin logined', admin: adminForResponse, token })
     }
     catch (error) {
         console.error(error)

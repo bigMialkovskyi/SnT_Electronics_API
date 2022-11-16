@@ -13,14 +13,14 @@ module.exports = async (req, res) => {
     // const { title, description, img_name, product_type } = req.body
     const { title, description, product_type } = req.body
     //достаем пользователся из запроса 
-    const userId = req.user._id
+    const adminId = req.admin._id
 
 
     // проверяем наличие нужных данных
     if (!mediaFile) return res.status(400).send({ success: false, error: '"media" is required' })
 
     // записываем данные о файле в БД
-    const file = await store.files.actions.SAVE_FILE(mediaFile, userId)
+    const file = await store.files.actions.SAVE_FILE(mediaFile, adminId)
 
     // проверяем наличие нужных данных
     if (!title) return res.status(400).send({ success: false, error: '"title" is required' })
@@ -36,7 +36,7 @@ module.exports = async (req, res) => {
     const postData = {}
     postData.media = file._id
     if (description) {
-      if (description.length > 500) return res.status(400).send({ success: false, error: 'description lenght must be less then 500 symbols' })
+      if (description.length > 5000) return res.status(400).send({ success: false, error: 'description lenght must be less then 5000 symbols' })
       postData.description = description
     }
     // const img = fs.readFileSync(path.join(__dirname + '../../../../../uploads/' + img_name))

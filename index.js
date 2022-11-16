@@ -15,6 +15,7 @@ require("dotenv").config()
 
 const app = express()
 app.use(cors())
+app.use(express.static('static'))
 app.use(urlencoded({ extended: true }))
 app.use(json())
 app.use(morgan('dev'))
@@ -26,11 +27,15 @@ api(app)
 app.set('views', './views');
 app.set('view engine', 'pug');
 
+// app.get('/admin-register', (req, res) => {
+//   res.render('register', {
+//     name: "vlad",
+//     city: "Las Vegas"
+//   });
+// });
+
 app.get('/admin-register', (req, res) => {
-  res.render('register', {
-    name: "vlad",
-    city: "Las Vegas"
-  });
+  res.render('register', {});
 });
 
 app.get('/admin-login', (req, res) => {

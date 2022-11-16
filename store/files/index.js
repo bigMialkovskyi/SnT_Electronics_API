@@ -24,9 +24,9 @@ const actions = {
         })
         await fileRecord.save()
   
-        const user = await db.users.findOne({ _id: authorId })
-        user.files.push(fileRecord._id)
-        await user.save()
+        const admin = await db.admins.findOne({ _id: authorId })
+        admin.files.push(fileRecord._id)
+        await admin.save()
   
         resolve(fileRecord)
       } catch (error) {

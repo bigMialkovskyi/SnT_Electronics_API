@@ -3,20 +3,35 @@ block main
   #container(class="container")
     form(action='http://localhost:3093/products/create', method='POST', class="form", enctype="multipart/form-data")
       p(class="form-desc") Тут можна створити новий пост
-      label(for="title") Enter the title
-      input(id="productTitle", type='text', name='title', value='', class="input-text")
+      div(class="text-input-element")
+        label(for="title") Enter the title
+        input(id="productTitle", type='text', name='title', value='', class="input-text")
 
-      label(for="description") Enter the description
-      input(id="productDesc", type='text', name='description', value='', class="input-text")
+      div(class="text-input-element")
+        label(for="description") Enter the description
+        textarea(id="productDesc", type='text', name='description', value='', class="input-text-area")
+        //- input(id="productDesc", type='text', name='description', value='', class="input-text")
 
-      label(for="product_type") Enter the product type
-      input(id="productType", type='text', name='product_type', value='', class="input-text")
+      div(class="radio-btn-container")
+        p(class="radio-desc") Виберіть тип продукту
+        label(for="typeChoice1", class="radio-element") Для аграріїв
+          input(type="radio", id="typeChoice1", name="product_type", value="for_farmers")
+          span(class="checkmark")
 
-      label(for="mediaFile") Select the image
-      input(id="productImg", type='file', name='mediaFile')
+        label(for="typeChoice2", class="radio-element") Вимірювальні пристрої 
+          input(type="radio", id="typeChoice2", name="product_type", value="measuring_device")
+          span(class="checkmark")
+
+        label(for="typeChoice3", class="radio-element") Інше
+          input(type="radio", id="typeChoice3", name="product_type", value="other")
+          span(class="checkmark")
+
+      div(class="select-image-container")
+        label(for="mediaFile") Оберіть медіа файл
+        input(id="productImg", type='file', name='mediaFile')
 
       input(type='submit', value='Submit' class="submit-btn")
-    input(type='submit', onclick="getData()", class="submit-btn")
+    //- input(type='submit', onclick="getData()", class="submit-btn")
     
   //-   h5 Hello #{name}
   //- #app  {{message}}

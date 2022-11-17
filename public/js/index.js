@@ -82,13 +82,3 @@ function registerAdmin() {
     }
   };
 }
-
-function getData() {
-  const productTitle = document.getElementById("productTitle").value;
-  const productDesc = document.getElementById("productDesc").value;
-  const productType = document.getElementById("productType").value;
-  const productImg = document.getElementById("productImg").value;
-
-  console.log(productTitle, productDesc, productType, productImg)
-  console.log(typeof (productImg))
-}

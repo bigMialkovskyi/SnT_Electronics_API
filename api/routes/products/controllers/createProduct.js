@@ -1,8 +1,7 @@
 const { Types } = require('mongoose')
 var fs = require('fs');
 var path = require('path');
-// const { types } = require('mongoose')
-// const jwt = require('jsonwebtoken')
+
 
 
 module.exports = async (req, res) => {
@@ -10,7 +9,6 @@ module.exports = async (req, res) => {
     //get file from req
     const mediaFile = req.file
     // получаем данные из body запроса
-    // const { title, description, img_name, product_type } = req.body
     const { title, description, product_type } = req.body
     //достаем пользователся из запроса 
     const adminId = req.admin._id
@@ -25,7 +23,6 @@ module.exports = async (req, res) => {
     // проверяем наличие нужных данных
     if (!title) return res.status(400).send({ success: false, error: '"title" is required' })
     if (!description) return res.status(400).send({ success: false, error: '"description" is required' })
-    // if (!img_name) return res.status(400).send({ success: false, error: '"img_src" is required' })
     // проверяем валидность данных
     if (title.length < 6) return res.status(400).send({ success: false, error: 'title lenght must be bigger then 6 symbols' })
     if (description.length < 8) return res.status(400).send({ success: false, error: 'description length must be bigger then 8 symbols' })
@@ -39,7 +36,6 @@ module.exports = async (req, res) => {
       if (description.length > 5000) return res.status(400).send({ success: false, error: 'description lenght must be less then 5000 symbols' })
       postData.description = description
     }
-    // const img = fs.readFileSync(path.join(__dirname + '../../../../../uploads/' + img_name))
     // создаем новий продукт
     const newProduct = new db.products({
       _id: Types.ObjectId(),

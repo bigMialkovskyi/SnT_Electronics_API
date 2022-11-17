@@ -1,9 +1,7 @@
-const db = require("../../../../db")
-
 module.exports = async (req, res) => {
   try {
 
-    const products = await db.products.find().select('_id title description createdAt product_type updatedAt').populate(media)
+    const products = await db.products.find().select('_id title description createdAt product_type updatedAt').populate('media')
     // const options = {
     //   select: '_id title description media createdAt product_type updatedAt',
     //   populate: { path: 'files', select: 'path' }

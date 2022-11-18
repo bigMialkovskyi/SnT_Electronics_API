@@ -1,6 +1,6 @@
-# NAME=social-network-backend
+# NAME=snt-backend
 # PORT=3093
 # HOST=localhost
 # DB_HOST=mongodb://localhost:27017/
-# DB_NAME=social-network
+# DB_NAME=snt-electronics
 # SECRET_KEY=

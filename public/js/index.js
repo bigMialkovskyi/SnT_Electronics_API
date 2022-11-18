@@ -14,7 +14,8 @@ function loginAdmin() {
   const adminPassword = document.getElementById("adminPassword").value;
 
   const xhttp = new XMLHttpRequest();
-  xhttp.open("POST", "http://localhost:3093/auth/admins/login");
+  // xhttp.open("POST", "http://localhost:3093/auth/admins/login");
+  xhttp.open("POST", "https://snt-electronics.herokuapp.com/auth/admins/login");
   xhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
   xhttp.send(JSON.stringify({
     "login": adminLogin,
@@ -51,7 +52,8 @@ function registerAdmin() {
   const adminPassword = document.getElementById("adminPassword").value;
 
   const xhttp = new XMLHttpRequest();
-  xhttp.open("POST", "http://localhost:3093/auth/admins/register");
+  xhttp.open("POST", "https://snt-electronics.herokuapp.com/auth/admins/register");
+  // xhttp.open("POST", "http://localhost:3093/auth/admins/register");
   xhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
   xhttp.send(JSON.stringify({
     "login": adminLogin,

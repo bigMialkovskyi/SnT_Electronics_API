@@ -3,5 +3,5 @@ node_modules/
 package-lock.json
 
 # file system
-static/uploads/*
+# static/uploads/*
 !static/uploads/.gitkeep 

@@ -46,4 +46,4 @@ app.get('/home', (req, res) => {
   res.render('home', {});
 });
 
-app.listen(process.env.PORT, process.env.HOST, () => console.log(`App "${process.env.NAME}" listen: ${process.env.HOST}:${process.env.PORT}`))
+app.listen(process.env.PORT || 3093 , process.env.HOST, () => console.log(`App "${process.env.NAME}" listen: ${process.env.HOST}:${process.env.PORT}`))

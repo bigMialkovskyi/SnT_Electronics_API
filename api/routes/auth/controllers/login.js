@@ -25,10 +25,11 @@ module.exports = async (req, res) => {
         const userForResponse = {
             _id: user._id,
             identity: user.identity,
+            login: user.login
         }
 
         // отправляем информацию о авторизированом пользователя в качестве ответа на запрос
-        res.send({ success: true, message: 'user logined', user: userForResponse, token })
+        res.send({ success: true, message: 'user logined', user: userForResponse, token, username: login })
     }
     catch (error) {
         console.error(error)

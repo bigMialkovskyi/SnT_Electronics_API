@@ -7,4 +7,5 @@ module.exports = {
   register: require('./register'),
   adminLogin: require('./adminLogin'),
   adminRegister: require('./adminRegister'),
+  agroGsmSensorRegister: require('./agroGsmSensorRegister'),
 }

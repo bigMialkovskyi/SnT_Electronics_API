@@ -1,6 +1,5 @@
 const mongoosePaginate = require('mongoose-paginate-v2')
 
-
 module.exports = function (mongoose, connection) {
   // создание модели представляения комментария в БД
   const schema = new mongoose.Schema({

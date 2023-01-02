@@ -10,5 +10,6 @@ router.post('/admins/register', controllers.adminRegister)
 router.post('/admins/login', controllers.adminLogin)
 router.post('/devices/register', controllers.deviceRegister)
 router.post('/device/login', controllers.deviceLogin)
+router.post('/agro-gsm/register', controllers.agroGsmSensorRegister)
 
 module.exports = router

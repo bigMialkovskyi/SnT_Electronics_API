@@ -1,5 +1,6 @@
 module.exports = function (mongoose, connection) {
   // создание модели представляения пользователя в БД
+  // console.log(mongoose.Schema.Types)
   const schema = new mongoose.Schema({
     _id: mongoose.Schema.Types.ObjectId,
     identity: {
@@ -7,15 +8,15 @@ module.exports = function (mongoose, connection) {
       unique: true,
       required: true
     },
-    password: {
+    name: {
       type: String,
-      required: true
     },
-    temperature: [{
-      type: String,
-    }],
-    humidity: [{
-      type: String,
+    measurements: [{
+      airTemperature: Number,
+      soilTemperature: Number,
+      humidity: Number,
+      pressure: Number,
+      updateTime: String
     }],
     user: {
       type: mongoose.Schema.Types.ObjectId,

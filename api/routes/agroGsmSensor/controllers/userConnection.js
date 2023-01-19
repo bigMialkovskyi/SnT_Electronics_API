@@ -1,6 +1,8 @@
 const { Types } = require('mongoose')
 var fs = require('fs');
 var path = require('path');
+const e = require('express');
+const device = require('../../../../middlewares/verifyAuth/device');
 
 
 
@@ -10,52 +12,41 @@ module.exports = async (req, res) => {
     // отримуємо дані з тіла зампиту
     const { userID, sensorID } = req.body
 
+    let identity = sensorID
 
+    // перевірка наявності потрібних даних
     if (!userID) return res.status(400).send({ success: false, error: '"user ID" is required' })
     if (!sensorID) return res.status(400).send({ success: false, error: '"sensor ID" is required' })
 
     // перевіряємо чи такий користувач існує
-    const existUser = await db.users.findOne({ userID })
-    if (existSensor) return res.status(400).send({ success: false, error: 'user with this identity does not exist' })
+    const existUser = await db.users.findById(userID)
+    if (!existUser) return res.status(400).send({ success: false, error: 'user with this identity does not exist' })
 
     // перевіряємо чи такий доатчик існує
-    const existSensor = await db.agrogsmsensors.findOne({ sensorID })
-    if (existSensor) return res.status(400).send({ success: false, error: 'sensor with this identity does not exist' })
+    const existSensor = await db.agroGsmSensors.findOne({ identity })
+    if (!existSensor) return res.status(400).send({ success: false, error: 'sensor with this identity does not exist' })
 
+    if(existUser.devices) {
+      existUser.devices.forEach(device => {
+        if (device == existSensor._id ) return res.status(400).send({ success: false, error: 'you are already connected to this device' })
+      });
+    }
 
-    // перевірка наявності потрібних даних
-    if (!airTemperatureUpdat) return res.status(400).send({ success: false, error: '"airTemperature" is required' })
-    if (!soilTemperatureUpdat) return res.status(400).send({ success: false, error: '"soilTemperature" is required' })
-    if (!humidityUpdat) return res.status(400).send({ success: false, error: '"humidity" is required' })
-    if (!pressureUpdat) return res.status(400).send({ success: false, error: '"pressure" is required' })
+    console.log(existSensor.user)
 
-    // перевіряємо валідність даних
-    // потрібно набисати перевірку валідності після узгодження формату даних
-    // if (airTemperature.length < 6) return res.status(400).send({ success: false, error: 'airTemperature lenght must be bigger then 6 symbols' })
+    //перевіряємо чи данай деваайс уже підключено
+    if (existSensor.user) return res.status(400).send({ success: false, error: 'this device is already connected to another account' })
 
-    const currentDateTime = new Date().toString();
+   
+    existUser.devices = [existSensor._id, ...existUser.devices]
+    existSensor.user = existUser._id
 
-    await db.agroGsmSensors.updateOne({ identity: incomingIdentity }, {
-      $unshift: {
-        measurements: {
-          airTemperature: airTemperatureUpdat,
-          soilTemperature: soilTemperatureUpdat,
-          humidity: humidityUpdat,
-          pressure: pressureUpdat,
-          updateTime: currentDateTime
-        }
-      }
-    }, (error) => {
-      if (error) {
-        console.log(error);
-      } else {
-        console.log('User updated successfully');
-      }
-    });
+    await existUser.save()
+    await existSensor.save()
 
 
     // отправляем информацию о созданом продукте в качестве ответа на запрос
-    res.send({ success: true, message: 'measurments updated'})
+    res.send({ success: true, message: 'the device is connected to the user profile' })
   } catch (error) {
     console.error(error)
     res.status(500).send({ success: false, error: 'Internal server error' })

@@ -10,9 +10,18 @@ module.exports = async (req, res) => {
     // отримуємо дані з тіла зампиту
     const { userID, sensorID } = req.body
 
-    // перевіряємо чи такий датчик існує
-    const existSensor = await db.agrogsmsensors.findOne({ incomingIdentity })
+
+    if (!userID) return res.status(400).send({ success: false, error: '"user ID" is required' })
+    if (!sensorID) return res.status(400).send({ success: false, error: '"sensor ID" is required' })
+
+    // перевіряємо чи такий користувач існує
+    const existUser = await db.users.findOne({ userID })
+    if (existSensor) return res.status(400).send({ success: false, error: 'user with this identity does not exist' })
+
+    // перевіряємо чи такий доатчик існує
+    const existSensor = await db.agrogsmsensors.findOne({ sensorID })
     if (existSensor) return res.status(400).send({ success: false, error: 'sensor with this identity does not exist' })
+
 
     // перевірка наявності потрібних даних
     if (!airTemperatureUpdat) return res.status(400).send({ success: false, error: '"airTemperature" is required' })

@@ -1,4 +1,5 @@
-module.exports = (mongoose, connection) => {
+module.exports = function (mongoose, connection) {
+
   const schema = new mongoose.Schema({
     _id: mongoose.Schema.Types.ObjectId,
     identity: {

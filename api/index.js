@@ -5,7 +5,7 @@ const auth = require('./routes/auth')
 const devices = require('./routes/devices')
 const sensors = require('./routes/sensors')
 const products = require('./routes/products')
-const agroGsmSensors = require('../db/models/agroGsmSensors')
+const agroGsmSensors = require('./routes/agroGsmSensor')
 
 // экспорт объекта API
 module.exports = (app) => {

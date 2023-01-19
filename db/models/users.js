@@ -11,10 +11,10 @@ module.exports = function (mongoose, connection) {
             type: String,
             required: true
         },
-        device: {
+        devices: [{
             type: mongoose.Schema.Types.ObjectId,
-            ref: 'devices'
-        }
+            ref: 'agroGsmSensors'
+        }],
 
     }, { timestamps: true })
 

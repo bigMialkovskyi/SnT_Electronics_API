@@ -26,7 +26,6 @@ module.exports = async (req, res) => {
     // проверяем валидность данных
     if (title.length < 6) return res.status(400).send({ success: false, error: 'title lenght must be bigger then 6 symbols' })
     if (description.length < 8) return res.status(400).send({ success: false, error: 'description length must be bigger then 8 symbols' })
-    // if (img_name.length < 3) return res.status(400).send({ success: false, error: 'img_src lenght must be bigger then 3 symbols' })
     if (product_type.length < 3) return res.status(400).send({ success: false, error: 'product_type lenght must be bigger then 3 symbols' })
 
     // создаем пустой объект для добавления поста в БД
@@ -41,7 +40,6 @@ module.exports = async (req, res) => {
       _id: Types.ObjectId(),
       title,
       description,
-      // img,
       product_type,
       ...postData
     })
@@ -52,7 +50,6 @@ module.exports = async (req, res) => {
       _id: newProduct._id,
       title: newProduct.title,
       description: newProduct.description,
-      // img: newProduct.img,
       media: newProduct.media,
       product_type: newProduct.product_type
     }

@@ -1,11 +1,3 @@
-const { Types } = require('mongoose')
-var fs = require('fs');
-var path = require('path');
-const e = require('express');
-const device = require('../../../../middlewares/verifyAuth/device');
-
-
-
 module.exports = async (req, res) => {
   try {
 
@@ -26,18 +18,17 @@ module.exports = async (req, res) => {
     const existSensor = await db.agroGsmSensors.findOne({ identity })
     if (!existSensor) return res.status(400).send({ success: false, error: 'sensor with this identity does not exist' })
 
-    if(existUser.devices) {
-      existUser.devices.forEach(device => {
-        if (device == existSensor._id ) return res.status(400).send({ success: false, error: 'you are already connected to this device' })
+    // перевіряємо чи девайс уже підключено до даного користувача
+    if (existUser.devices) {
+      existUser.devices.find(device => {
+        if (device.equals(existSensor._id)) return res.status(400).send({ success: false, error: 'you are already connected to this device' })
       });
     }
 
-    console.log(existSensor.user)
-
-    //перевіряємо чи данай деваайс уже підключено
+    //перевіряємо чи данай деваайс уже підключено до іншого користувача
     if (existSensor.user) return res.status(400).send({ success: false, error: 'this device is already connected to another account' })
 
-   
+
     existUser.devices = [existSensor._id, ...existUser.devices]
     existSensor.user = existUser._id
 

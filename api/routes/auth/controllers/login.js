@@ -25,7 +25,8 @@ module.exports = async (req, res) => {
         const userForResponse = {
             _id: user._id,
             identity: user.identity,
-            login: user.login
+            login: user.login,
+            devices: user.devices
         }
 
         // отправляем информацию о авторизированом пользователя в качестве ответа на запрос

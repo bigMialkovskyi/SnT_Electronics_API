@@ -1,9 +1,3 @@
-const { Types } = require('mongoose')
-var fs = require('fs');
-var path = require('path');
-
-
-
 module.exports = async (req, res) => {
   try {
 

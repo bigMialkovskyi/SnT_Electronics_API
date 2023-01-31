@@ -1,13 +1,14 @@
 module.exports = async (req, res) => {
   try {
     // отримуємо дані з тіла зампиту
-    const { userID, sensorID } = req.body
+    const { userID, sensorID, name } = req.body
 
     let identity = sensorID
 
     // перевірка наявності потрібних даних
     if (!userID) return res.status(400).send({ success: false, error: '"user ID" is required' })
     if (!sensorID) return res.status(400).send({ success: false, error: '"sensor ID" is required' })
+    if (!name) return res.status(400).send({ success: false, error: '"name" is required' })
 
     // перевіряємо чи такий користувач існує
     const existUser = await db.users.findById(userID)
@@ -25,6 +26,7 @@ module.exports = async (req, res) => {
 
     existUser.devices = [existSensor._id, ...existUser.devices]
     existSensor.user = existUser._id
+    existSensor.name = name
 
     await existUser.save()
     await existSensor.save()

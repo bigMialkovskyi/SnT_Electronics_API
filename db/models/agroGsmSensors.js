@@ -9,6 +9,9 @@ module.exports = function (mongoose, connection) {
     },
     name: {
       type: String,
+    }, 
+    batteryStatus: {
+      type: String,
     },
     measurements: [{
       airTemperature: Number,
@@ -16,7 +19,6 @@ module.exports = function (mongoose, connection) {
       humidity: Number,
       pressure: Number,
       updateTime: String,
-      batteryStatus: Number,
     }],
     user: {
       type: mongoose.Schema.Types.ObjectId,

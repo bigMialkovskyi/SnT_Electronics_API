@@ -7,6 +7,11 @@ module.exports = function (mongoose, connection) {
             unique: true,
             required: true
         },
+        email: {
+            type: String,
+            unique: true,
+            required: true
+        },
         password: {
             type: String,
             required: true
@@ -15,6 +20,10 @@ module.exports = function (mongoose, connection) {
             type: mongoose.Schema.Types.ObjectId,
             ref: 'agroGsmSensors'
         }],
+        confirmed: {
+            type: Boolean,
+            required: true
+        }
 
     }, { timestamps: true })
 

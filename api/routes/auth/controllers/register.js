@@ -1,43 +1,96 @@
 const { Types } = require('mongoose')
 const jwt = require('jsonwebtoken')
+const nodemailer = require('nodemailer')
 
 
 module.exports = async (req, res) => {
     try {
-        // получаем данные из body запроса
-        const { login, password } = req.body
+        // отримуємо дані з body запиту
+        const { login, password, email } = req.body
 
-        // проверяем наличие нужных данных
+        // перевіряємо наявність потрібних даних
         if (!login) return res.status(400).send({ success: false, error: '"login" is required' })
+        if (!email) return res.status(400).send({ success: false, error: '"email" is required' })
         if (!password) return res.status(400).send({ success: false, error: '"password" is required' })
-        // проверяем валидность данных
+
+        // перевіряємо валідність даних
         if (login.length < 4) return res.status(400).send({ success: false, error: 'login lenght must be bigger then 4 symbols' })
         if (password.length < 8) return res.status(400).send({ success: false, error: 'password length must be bigger then 8 symbols' })
-        // проверяем что никнейм не занят
+        if (email.length < 8) return res.status(400).send({ success: false, error: 'email length must be bigger then 8 symbols' })
+
+        // перевіряємо чи нікнейм не зайнятий
         const existUser = await db.users.findOne({ login })
         if (existUser) return res.status(400).send({ success: false, error: 'user with this identity already exist' })
+        // перевіряємо чи електронна пошта не зайнята
+        const existEmail = await db.users.findOne({ email })
+        if (existEmail) return res.status(400).send({ success: false, error: 'user with this email already exist' })
 
-        // шифруем пароль
+
+        // шифруємо пароль
         const encryptedPassword = await store.common.actions.ENCRYPT_PASSWORD(password)
 
-        // создаем нового пользователя
+        // створюємо нового користувача
         const newUser = new db.users({
             _id: Types.ObjectId(),
             login,
-            password: encryptedPassword
+            password: encryptedPassword,
+            email,
+            confirmed: false
         })
         await newUser.save()
 
-        // создаем токен доступа для созданного пользователя
+        // створюємо лінк для активації пошти користувача
+        const encryptedEmail = await store.common.actions.ENCRYPT_PASSWORD(email)
+        const activationLink = `localhost:3093/activationendpoint/${encryptedEmail}`
+
+        // створюємо запис активації в БД 
+        const newActivationRecord = new db.emailConfirm({
+            _id: Types.ObjectId(),
+            userID: newUser._id,
+            link: activationLink
+        })
+        await newActivationRecord.save()
+
+        // create reusable transporter object using the default SMTP transport
+        let transporter = nodemailer.createTransport({
+            host: "smtp.gmail.com",
+            // port: 465,
+            // secure: true, // use SSL/TLS
+            port: 587,
+            secure: false, // true for 465, false for other ports
+            auth: {
+                user: '', // generated ethereal user
+                pass: '', // generated ethereal password
+            },
+        });
+
+        // send mail with defined transport object
+        let info = await transporter.sendMail({
+            from: '', // sender address
+            to: "", // list of receivers
+            subject: "Confirm your email", // Subject line
+            text: activationLink, // plain text body
+            html: "<b>Hello world?</b>", // html body
+        });
+
+        console.log("Message sent: %s", info.messageId);
+        // Message sent: <b658f8ca-6296-ccf4-8306-87d57a0b4321@example.com>
+      
+        // Preview only available when sending through an Ethereal account
+        console.log("Preview URL: %s", nodemailer.getTestMessageUrl(info));
+        // Preview URL: https://ethereal.email/message/WaQKMgKddxQDoou...
+
+        // створємо токен доступу для щойноствореного користувача
         const token = await jwt.sign({ _id: newUser._id }, store.common.getters.GET_SECRET_KEY())
 
-        // из записи пользователя в БД формируем объект пользователя который будет показывать
+        // із запису користувача в БД формуємо об'єкт користувача який буде показувати:
         const user = {
             _id: newUser._id,
             login: newUser.login,
+            email: newUser.email
         }
 
-        // отправляем информацию о созданом пользователя в качестве ответа на запрос
+        // відправляємо інформацію щодо створеного користувача в якості відповіді на запит
         res.send({ success: true, message: 'user created', user, token })
     } catch (error) {
         console.error(error)

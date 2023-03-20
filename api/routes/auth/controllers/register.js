@@ -53,21 +53,22 @@ module.exports = async (req, res) => {
 
         // create reusable transporter object using the default SMTP transport
         let transporter = nodemailer.createTransport({
-            host: "smtp.gmail.com",
+            // host: "smtp.gmail.com",
             // port: 465,
             // secure: true, // use SSL/TLS
-            port: 587,
-            secure: false, // true for 465, false for other ports
+            service: 'gmail',
+            // port: 587,
+            // secure: false, // true for 465, false for other ports
             auth: {
-                user: '', // generated ethereal user
-                pass: '', // generated ethereal password
+                user: `${process.env.EMAIL}`, // generated ethereal user
+                pass: `${process.env.EMAIL_PASS}`, // generated ethereal password
             },
         });
 
         // send mail with defined transport object
         let info = await transporter.sendMail({
-            from: '', // sender address
-            to: "", // list of receivers
+            from: `vlad <${process.env.EMAIL}>`, // sender address
+            to: "vladmalpro37@gmail.com", // list of receivers
             subject: "Confirm your email", // Subject line
             text: activationLink, // plain text body
             html: "<b>Hello world?</b>", // html body

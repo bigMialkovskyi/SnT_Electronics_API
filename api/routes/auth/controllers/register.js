@@ -41,7 +41,7 @@ module.exports = async (req, res) => {
 
         // створюємо лінк для активації пошти користувача
         const encryptedEmail = await store.common.actions.ENCRYPT_PASSWORD(email)
-        const activationLink = `localhost:3093/activationendpoint/${encryptedEmail}`
+        const activationLink = `${process.env.HOST}:${process.env.PORT}/activationendpoint/${encryptedEmail}`
 
         // створюємо запис активації в БД 
         const newActivationRecord = new db.emailConfirm({
@@ -53,12 +53,9 @@ module.exports = async (req, res) => {
 
         // create reusable transporter object using the default SMTP transport
         let transporter = nodemailer.createTransport({
-            // host: "smtp.gmail.com",
-            // port: 465,
-            // secure: true, // use SSL/TLS
-            service: 'gmail',
-            // port: 587,
-            // secure: false, // true for 465, false for other ports
+            host: "smtp.ukr.net",
+            port: 465,
+            secure: true, // use SSL/TLS
             auth: {
                 user: `${process.env.EMAIL}`, // generated ethereal user
                 pass: `${process.env.EMAIL_PASS}`, // generated ethereal password
@@ -67,11 +64,11 @@ module.exports = async (req, res) => {
 
         // send mail with defined transport object
         let info = await transporter.sendMail({
-            from: `vlad <${process.env.EMAIL}>`, // sender address
-            to: "vladmalpro37@gmail.com", // list of receivers
+            from: `SnT Electronics <${process.env.EMAIL}>`, // sender address
+            to: String(email), // list of receivers
             subject: "Confirm your email", // Subject line
-            text: activationLink, // plain text body
-            html: "<b>Hello world?</b>", // html body
+            text: `Hello`, // plain text body
+            html: `<b>follow the link to activate your email: ${activationLink}</b>`, // html body
         });
 
         console.log("Message sent: %s", info.messageId);

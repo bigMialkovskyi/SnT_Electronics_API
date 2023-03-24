@@ -41,20 +41,21 @@ module.exports = async (req, res) => {
 
         // створюємо лінк для активації пошти користувача
         const encryptedEmail = await store.common.actions.ENCRYPT_PASSWORD(email)
-        const activationLink = `${process.env.HOST}:${process.env.PORT}/activationendpoint/${encryptedEmail}`
+        const activationLink = `${process.env.HOST}:${process.env.PORT}/auth/confirm-email/${encryptedEmail}`
 
         // створюємо запис активації в БД 
         const newActivationRecord = new db.emailConfirm({
             _id: Types.ObjectId(),
             userID: newUser._id,
-            link: activationLink
+            link: activationLink,
+            encryptedEmail: encryptedEmail
         })
         await newActivationRecord.save()
 
         // create reusable transporter object using the default SMTP transport
         let transporter = nodemailer.createTransport({
-            host: "smtp.ukr.net",
-            port: 465,
+            host: `${process.env.SMTP_HOST}`,
+            port: process.env.SMTP_PORT,
             secure: true, // use SSL/TLS
             auth: {
                 user: `${process.env.EMAIL}`, // generated ethereal user
@@ -68,12 +69,12 @@ module.exports = async (req, res) => {
             to: String(email), // list of receivers
             subject: "Confirm your email", // Subject line
             text: `Hello`, // plain text body
-            html: `<b>follow the link to activate your email: ${activationLink}</b>`, // html body
+            html: `<b>Hello. Welcome to the SnT Electronics team. The last step remains. Follow the link to activate your email: <a href="${activationLink}">${activationLink}</a></b>`, // html body
         });
 
         console.log("Message sent: %s", info.messageId);
         // Message sent: <b658f8ca-6296-ccf4-8306-87d57a0b4321@example.com>
-      
+
         // Preview only available when sending through an Ethereal account
         console.log("Preview URL: %s", nodemailer.getTestMessageUrl(info));
         // Preview URL: https://ethereal.email/message/WaQKMgKddxQDoou...

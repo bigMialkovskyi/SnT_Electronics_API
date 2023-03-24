@@ -12,8 +12,8 @@ module.exports = async (req, res) => {
 
         // находим пользователя в БД
         const user = await db.users.findOne({ login })
-        if (!user) return res.send({ success: false, error: 'user with this identity not exist' })
-        if (!user.confirmed) return res.send({ success: false, error: 'confirm your email first' })
+        if (!user) return res.status(500).send({ success: false, error: 'user with this identity not exist' })
+        if (!user.confirmed) return res.status(500).send({ success: false, error: 'confirm your email first' })
 
         // проверяем пароль
         const comparePasswordResult = await store.common.actions.CHECK_ENCRYPTED_PASSWORD(password, user.password)

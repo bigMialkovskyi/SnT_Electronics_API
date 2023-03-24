@@ -8,4 +8,5 @@ module.exports = {
   adminLogin: require('./adminLogin'),
   adminRegister: require('./adminRegister'),
   agroGsmSensorRegister: require('./agroGsmSensorRegister'),
+  confirmEmail: require('./confirmEmail'),
 }

@@ -4,11 +4,18 @@ module.exports = function (mongoose, connection) {
       _id: mongoose.Schema.Types.ObjectId,
       userID: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'users'
+        ref: 'users',
+        unique: true,
       },
       link: {
         type: String,
-        require: true
+        require: true,
+        unique: true,
+      },
+      encryptedEmail: {
+        type: String,
+        require: true,
+        unique: true
       }
     }, { timestamps: true })
   

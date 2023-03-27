@@ -15,9 +15,9 @@ module.exports = async (req, res) => {
         const confirmedUser = await db.users.findOneAndUpdate(filter, update, { new: true })
 
         // видаляємо документ активації так як користувача уже активовано
-        const deleteDocument = await db.emailConfirm.findOneAndDelete({ encryptedEmail:email })
+        const deleteDocument = await db.emailConfirm.findOneAndDelete({ encryptedEmail: email })
 
-        res.send({ success: true, message: 'Email confirmed. You can now go to your personal account.', user: confirmElement })
+        res.send({ success: true, message: 'Email confirmed. You can now go to your personal account.' })
     } catch (error) {
         console.error(error)
         res.status(500).send({ success: false, error: 'Internal server error' })

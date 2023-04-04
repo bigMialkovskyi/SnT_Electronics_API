@@ -7,16 +7,18 @@ module.exports = async (req, res) => {
     if (!sensorsList) return res.status(400).send({ success: false, error: 'sensors list is required' })
 
     //отримуємо виміри датчиків з БД
+
     let measForRespose = await Promise.all(sensorsList.map(async (element) => {
       const sensor = await db.agroGsmSensors.findOne({ _id: element })
       const result = {
         id: sensor.id,
         identity: sensor.identity,
         measurements: sensor.measurements,
-        name: sensor.name
+        name: sensor.name,
+        batteryStatus: sensor.batteryStatus
       }
       return result
-    }))
+    })) 
 
     // отправляем информацию о созданом продукте в качестве ответа на запрос
     res.send({ success: true, message: 'measurements successfully obtained', measForRespose })

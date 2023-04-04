@@ -23,5 +23,6 @@ module.exports = () => {
     admins: require('./models/admins')(mongoose, connection),
     files: require('./models/files')(mongoose, connection),
     agroGsmSensors: require('./models/agroGsmSensors')(mongoose, connection),
+    emailConfirm: require('./models/emailConfirm')(mongoose, connection),
   }
 }

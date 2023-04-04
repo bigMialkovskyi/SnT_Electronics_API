@@ -2,7 +2,7 @@ module.exports = async (req, res) => {
   try {
 
     // отримуємо дані з тіла зампиту
-    const { identity, airTemperature, soilTemperature, humidity, pressure } = req.body
+    const { identity, airTemperature, soilTemperature, humidity, pressure,  batteryStatus} = req.body
 
     // перевіряємо чи такий датчик існує
     const existSensor = await db.agroGsmSensors.findOne({ identity })
@@ -10,6 +10,7 @@ module.exports = async (req, res) => {
 
     // перевірка наявності потрібних даних
     if (!airTemperature) return res.status(400).send({ success: false, error: '"airTemperature" is required' })
+    if (!batteryStatus) return res.status(400).send({ success: false, error: '"batteryStatus" is required' })
     if (!soilTemperature) return res.status(400).send({ success: false, error: '"soilTemperature" is required' })
     if (!humidity) return res.status(400).send({ success: false, error: '"humidity" is required' })
     if (!pressure) return res.status(400).send({ success: false, error: '"pressure" is required' })
@@ -30,6 +31,8 @@ module.exports = async (req, res) => {
       },
       ...existSensor.measurements
     ]
+    existSensor.batteryStatus = batteryStatus
+
 
     await existSensor.save()
     // отправляем информацию о созданом продукте в качестве ответа на запрос

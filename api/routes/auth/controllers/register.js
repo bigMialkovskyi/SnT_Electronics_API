@@ -6,12 +6,14 @@ const nodemailer = require('nodemailer')
 module.exports = async (req, res) => {
     try {
         // отримуємо дані з body запиту
-        const { login, password, email } = req.body
+        const { login, password, email, sensorID } = req.body
 
         // перевіряємо наявність потрібних даних
         if (!login) return res.status(400).send({ success: false, error: '"login" is required' })
         if (!email) return res.status(400).send({ success: false, error: '"email" is required' })
         if (!password) return res.status(400).send({ success: false, error: '"password" is required' })
+        if (!sensorID) return res.status(400).send({ success: false, error: '"sensor ID" is required' })
+
 
         // перевіряємо валідність даних
         if (login.length < 4) return res.status(400).send({ success: false, error: 'login lenght must be bigger then 4 symbols' })
@@ -24,7 +26,14 @@ module.exports = async (req, res) => {
         // перевіряємо чи електронна пошта не зайнята
         const existEmail = await db.users.findOne({ email })
         if (existEmail) return res.status(400).send({ success: false, error: 'user with this email already exist' })
+        // перевіряємо чи такий доатчик існує
+        const existSensor = await db.agroGsmSensors.findOne({ identity })
+        if (!existSensor) return res.status(400).send({ success: false, error: 'sensor with this identity does not exist' })
+        //перевіряємо чи данай деваайс уже підключено до іншого користувача
+        if (existSensor.user) return res.status(400).send({ success: false, error: 'this device is already connected to another account' })
 
+        // перевіряємо чи девайс уже підключено до даного користувача
+        if (existUser.devices.some((id) => { return id.equals(existSensor._id) })) return res.status(400).send({ success: false, error: 'you are already connected to this device' })
 
         // шифруємо пароль
         const encryptedPassword = await store.common.actions.ENCRYPT_PASSWORD(password)
@@ -48,7 +57,8 @@ module.exports = async (req, res) => {
             _id: Types.ObjectId(),
             userID: newUser._id,
             link: activationLink,
-            encryptedEmail: encryptedEmail
+            encryptedEmail: encryptedEmail,
+            sensorID: sensorID
         })
         await newActivationRecord.save()
 

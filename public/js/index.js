@@ -15,7 +15,7 @@ function loginAdmin() {
 
   const xhttp = new XMLHttpRequest();
   // xhttp.open("POST", "https://snt-electronics.herokuapp.com/auth/admins/login");
-  xhttp.open("POST", `${process.env.API_ENDPOINT}/auth/admins/login`);
+  xhttp.open("POST", `http://664326-vds-dm.penzyakov.gmhost.pp.ua:3093/auth/admins/login`);
   xhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
   xhttp.send(JSON.stringify({
     "login": adminLogin,
@@ -53,7 +53,7 @@ function registerAdmin() {
 
   const xhttp = new XMLHttpRequest();
   // xhttp.open("POST", "https://snt-electronics.herokuapp.com/auth/admins/register");
-  xhttp.open("POST", `${process.env.API_ENDPOINT}/auth/admins/register`);
+  xhttp.open("POST", `http://664326-vds-dm.penzyakov.gmhost.pp.ua:3093/auth/admins/register`);
   xhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
   xhttp.send(JSON.stringify({
     "login": adminLogin,

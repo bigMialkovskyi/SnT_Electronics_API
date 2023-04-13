@@ -2,7 +2,7 @@ extends template.pug
 block main
   #container(class="container")
     //- form(action='https://snt-electronics.herokuapp.com/products/create', method='POST', class="form", enctype="multipart/form-data")
-    form(action=`${process.env.API_ENDPOINT}/products/create`, method='POST', class="form", enctype="multipart/form-data")
+    form(action=`http://664326-vds-dm.penzyakov.gmhost.pp.ua:3093/products/create`, method='POST', class="form", enctype="multipart/form-data")
       p(class="form-desc") Тут можна створити новий пост
       div(class="text-input-element")
         label(for="title") Enter the title

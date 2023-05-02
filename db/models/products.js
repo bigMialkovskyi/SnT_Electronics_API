@@ -9,6 +9,14 @@ module.exports = function (mongoose, connection) {
     description: {
       type: String,
       required: true
+    }, 
+    title_en: {
+      type: String,
+      required: true
+    },
+    description_en: {
+      type: String,
+      required: true
     },
     media: {
       type: mongoose.Schema.Types.ObjectId,

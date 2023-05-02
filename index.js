@@ -6,12 +6,10 @@ const path = require('path')
 const bodyParser = require('body-parser')
 const cookieParser = require('cookie-parser')
 
-
 global.store = require('./store')
 global.db = require('./db')()
 const api = require('./api')
 require("dotenv").config()
-
 
 const app = express()
 app.use(cors())

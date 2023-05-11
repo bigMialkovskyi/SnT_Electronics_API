@@ -9,7 +9,7 @@ module.exports = async (req, res) => {
     //get file from req
     const mediaFile = req.file
     // получаем данные из body запроса
-    const { title, description, product_type } = req.body
+    const { title, title_en, description, description_en, product_type } = req.body
     //достаем пользователся из запроса 
     const adminId = req.admin._id
 
@@ -22,10 +22,14 @@ module.exports = async (req, res) => {
 
     // проверяем наличие нужных данных
     if (!title) return res.status(400).send({ success: false, error: '"title" is required' })
+    if (!title_en) return res.status(400).send({ success: false, error: '"en title" is required' })
     if (!description) return res.status(400).send({ success: false, error: '"description" is required' })
+    if (!description_en) return res.status(400).send({ success: false, error: '"en description" is required' })
     // проверяем валидность данных
     if (title.length < 6) return res.status(400).send({ success: false, error: 'title lenght must be bigger then 6 symbols' })
+    if (title_en.length < 6) return res.status(400).send({ success: false, error: 'en title lenght must be bigger then 6 symbols' })
     if (description.length < 8) return res.status(400).send({ success: false, error: 'description length must be bigger then 8 symbols' })
+    if (description_en.length < 8) return res.status(400).send({ success: false, error: 'en description length must be bigger then 8 symbols' })
     if (product_type.length < 3) return res.status(400).send({ success: false, error: 'product_type lenght must be bigger then 3 symbols' })
 
     // создаем пустой объект для добавления поста в БД
@@ -39,7 +43,9 @@ module.exports = async (req, res) => {
     const newProduct = new db.products({
       _id: Types.ObjectId(),
       title,
+      title_en,
       description,
+      description_en,
       product_type,
       ...postData
     })
@@ -49,7 +55,9 @@ module.exports = async (req, res) => {
     const product = {
       _id: newProduct._id,
       title: newProduct.title,
+      title_en: newProduct.title_en,
       description: newProduct.description,
+      description_en: newProduct.description_en,
       media: newProduct.media,
       product_type: newProduct.product_type
     }

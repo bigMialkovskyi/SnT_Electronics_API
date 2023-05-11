@@ -84,3 +84,26 @@ function registerAdmin() {
     }
   };
 }
+
+function getAllProducts() {
+  const xhr = new XMLHttpRequest();
+  xhr.open("GET", "http://localhost:3093/products/get/all");
+  xhr.send();
+  xhr.responseType = "json";
+  xhr.onload = () => {
+    if (xhr.readyState == 4 && xhr.status == 200) {
+      createProductList(xhr.response.products)
+    } else {
+      console.log(`Error: ${xhr.status}`);
+    }
+  };
+};
+
+
+
+function createProductList(productList) {
+  productList.forEach(element => {
+    document.getElementById('products-container').innerHTML += `<li class="product-elem">${element.title}</li>`;
+    console.log(element.title)
+  });
+}

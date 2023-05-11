@@ -8,12 +8,13 @@ html(lang="en")
     block styles
     link(rel="stylesheet" href="./css/main.css")
     link(rel="stylesheet" href="./css/header.css")
+    link(rel="stylesheet" href="./css/delete-page.css")
     link(rel="icon" type="image/x-icon" href="./images/favicon.png")
-  body 
+  body(onload="getAllProducts()")
     header( class="header" )
       h6 This is your header 
       div( class="delete-product-elem" )
-        a(href="http://localhost:3093/admin-login")
+        a(href="http://localhost:3093/delete-page")
           img( class="delete-page-icon" src="./images/gear.svg", alt="gear") 
     block scripts
     block main 

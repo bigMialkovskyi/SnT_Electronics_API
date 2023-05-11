@@ -40,6 +40,10 @@ app.get('/admin-login', (req, res) => {
   res.render('login', {});
 });
 
+app.get('/delete-page', (req, res) => {
+  res.render('deletePage', {});
+});
+
 app.get('/home', (req, res) => {
   res.render('home', {});
 });

@@ -1,0 +1,17 @@
+extends template.pug 
+block main
+    #container(class="container")
+        ol(id="products-container" class="products-container")
+        //- form(class="form")
+        //-   p(class="form-desc") Це сторінка для видалення продукції із сайту
+        //-   p(class="form-desc") Для продовження прийди авторизацію
+        //-   label(for="login") Enter the username
+        //-   input(id="adminLogin" type='text' name='login' value='' class="input-text")
+
+        //-   label(for="password") Enter the password
+        //-   input(id="adminPassword" type='password' name='password' value='' class="input-text")
+
+        button(onclick="getAllProducts()" class="submit-btn") Submit
+block scripts
+    //- script(src="https://unpkg.com/vue@3/dist/vue.global.js")
+    script(src="js/index.js")

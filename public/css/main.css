@@ -106,11 +106,11 @@ body {
 
 .container {
   /* height: calc(100% - 120px); */
-  height: 100%;
+  height: 90%;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  padding: 15px 25px;
+  padding: 0px 0.5vw;
 }
 
 .form {

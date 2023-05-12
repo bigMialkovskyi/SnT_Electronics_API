@@ -1,17 +1,21 @@
 extends template.pug 
 block main
     #container(class="container")
-        ol(id="products-container" class="products-container")
-        //- form(class="form")
-        //-   p(class="form-desc") Це сторінка для видалення продукції із сайту
-        //-   p(class="form-desc") Для продовження прийди авторизацію
-        //-   label(for="login") Enter the username
-        //-   input(id="adminLogin" type='text' name='login' value='' class="input-text")
+        div(class="delete-page-container")
+            ol(id="products-container" class="products-container")
 
-        //-   label(for="password") Enter the password
-        //-   input(id="adminPassword" type='password' name='password' value='' class="input-text")
+            div(id="content-container" class="content-container")
+                h5(class="delete-page-title") Для того щоб видалити товар на сайті введіть його ID двічі та натисніть кнопку "підтвердити"
+                form(class="delete-product-form")
+                    label(for="product-id") Введіть ID товару
+                    input(id="product-id" type='product-id' name='product-id' value='' class="delete-input")
 
-        button(onclick="getAllProducts()" class="submit-btn") Submit
+                    label(for="product-id-rep") Введіть ID товару ще раз
+                    input(id="product-id-rep" type='product-id-rep' name='product-id-rep' value='' class="delete-input")
+                button(onclick="deleteProduct()" class="delete-submit-btn") підтвердити
+                div(id="error-container")
 block scripts
     //- script(src="https://unpkg.com/vue@3/dist/vue.global.js")
     script(src="js/index.js")
+    script(src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.16/dist/sweetalert2.all.min.js")
+    script(src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous")

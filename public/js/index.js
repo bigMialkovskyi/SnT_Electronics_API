@@ -103,7 +103,49 @@ function getAllProducts() {
 
 function createProductList(productList) {
   productList.forEach(element => {
-    document.getElementById('products-container').innerHTML += `<li class="product-elem">${element.title}</li>`;
+    document.getElementById('products-container').innerHTML += `<li class="product-elem">Product title: ${element.title}<br><br>Product ID: ${element._id}</li>`;
     console.log(element.title)
   });
+};
+
+function deleteProduct() {
+  const deleteProductID = document.getElementById('product-id').value
+  const deleteProductIDRep = document.getElementById('product-id-rep').value
+//   console.log(`first ID: ${deleteProductID} 
+// second ID: ${deleteProductIDRep}`)
+//   console.log(deleteProductID == deleteProductIDRep)
+
+  if (deleteProductID != deleteProductIDRep) {
+    document.getElementById('error-container').innerHTML += `<h6 class="error-message">ID не співпадають. перевірте введені дані та спробуйте знову</h6>`;
+  }
+
+  if (deleteProductID == deleteProductIDRep) {
+    const xhttp = new XMLHttpRequest();
+
+    xhttp.open("DELETE", `http://localhost:3093/products/delete/${deleteProductID}`);
+    xhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+    xhttp.send();
+    xhttp.onreadystatechange = function () {
+      if (this.readyState == 4) {
+        const objects = JSON.parse(this.responseText);
+        if (objects['success'] == true) {
+          console.log(objects['message'])
+          // document.cookie = "token=" + objects['token'];
+          Swal.fire({
+            text: objects['message'],
+            icon: 'success',
+            confirmButtonText: 'OK'
+          });
+        } else {
+          Swal.fire({
+            text: objects['message'],
+            icon: 'error',
+            confirmButtonText: 'OK'
+          });
+        }
+      }
+    };
+  }
+
+
 }

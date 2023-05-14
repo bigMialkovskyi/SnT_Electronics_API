@@ -116,7 +116,7 @@ function deleteProduct() {
 //   console.log(deleteProductID == deleteProductIDRep)
 
   if (deleteProductID != deleteProductIDRep) {
-    document.getElementById('error-container').innerHTML += `<h6 class="error-message">ID не співпадають. перевірте введені дані та спробуйте знову</h6>`;
+    return document.getElementById('error-container').innerHTML += `<h6 class="error-message">ID не співпадають. перевірте введені дані та спробуйте знову</h6>`;
   }
 
   if (deleteProductID == deleteProductIDRep) {

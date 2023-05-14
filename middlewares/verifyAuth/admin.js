@@ -19,6 +19,6 @@ module.exports = async (req, res, next) => {
     next()
   } catch (error) {
     console.error(error)
-    return res.redirect('/login', { error: error.message })
+    return res.redirect( 401,'/admin-login')
   }
 }

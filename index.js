@@ -5,6 +5,8 @@ const morgan = require('morgan')
 const path = require('path')
 const bodyParser = require('body-parser')
 const cookieParser = require('cookie-parser')
+const middlewares = require('./middlewares')
+
 
 global.store = require('./store')
 global.db = require('./db')()
@@ -40,11 +42,11 @@ app.get('/admin-login', (req, res) => {
   res.render('login', {});
 });
 
-app.get('/delete-page', (req, res) => {
+app.get('/delete-page', middlewares.verifyAuth.admin, (req, res) => {
   res.render('deletePage', {});
 });
 
-app.get('/home', (req, res) => {
+app.get('/home', middlewares.verifyAuth.admin, (req, res) => {
   res.render('home', {});
 });
 

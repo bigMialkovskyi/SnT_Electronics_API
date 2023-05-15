@@ -42,14 +42,17 @@ app.get('/admin-login', (req, res) => {
   res.render('login', {});
 });
 
-app.get('/delete-page', middlewares.verifyAuth.admin, (req, res) => {
-  res.render('deletePage', {});
-});
-
 app.get('/home', middlewares.verifyAuth.admin, (req, res) => {
   res.render('home', {});
 });
 
+app.get('/update-product-page', middlewares.verifyAuth.admin, (req, res) => {
+  res.render('updateProductPage', {});
+});
+
+app.get('/delete-product-page', middlewares.verifyAuth.admin, (req, res) => {
+  res.render('deleteProductPage', {});
+});
 // app.listen(process.env.PORT || 5000, process.env.HOST || '0.0.0.0', () => console.log(`App "${process.env.NAME}" listen: ${process.env.HOST || '0.0.0.0'}:${process.env.PORT}`))
 
 app.listen(process.env.PORT, () => console.log(`App "${process.env.NAME}" listen: ${process.env.PORT}`))

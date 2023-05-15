@@ -17,11 +17,13 @@
 }
 
 .content-container {
+    /* height: 100%; */
     grid-area: 1 / 2 / 6 / 6;
     background-color: gray;
     margin: 1vh 0.5vw;
     padding: 1vh 1vw;
     border-radius: 7px;
+    /* overflow: auto; */
 }
 
 .product-elem {

@@ -1,0 +1,27 @@
+.update-page-container {
+    height: 100%;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-template-rows: repeat(6, 1fr);
+    grid-column-gap: 0px;
+    grid-row-gap: 0px;
+}
+
+.update-products-container {
+    grid-area: 1 / 1 / 7 / 2;
+    background-color: burlywood;
+    margin: 1vh 0.5vw;
+    padding: 1vh 1vw;
+    border-radius: 7px;
+    /* overflow: auto; */
+}
+
+.update-content-container {
+    /* height: 100%; */
+    grid-area: 1 / 2 / 7 / 6;
+    background-color: gray;
+    margin: 1vh 0.5vw;
+    padding: 1vh 1vw;
+    border-radius: 7px;
+    /* overflow: auto; */
+}

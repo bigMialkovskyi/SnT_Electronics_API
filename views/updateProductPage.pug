@@ -1,50 +1,61 @@
 extends template.pug 
 block main
-    #container(class="container")
-        div(class="update-page-container")
-            ol(id="products-container" class="update-products-container")
+  #container(class="container")
+    div(class="update-page-container")
+      ol(id="products-container" class="update-products-container")
 
-            div(id="content-container" class="update-content-container")
-                h5(class="delete-page-title") Для того щоб видалити товар на сайті введіть його ID двічі та натисніть кнопку "підтвердити"
-                //- form(action=`http://localhost:3093/products/create`, method='POST' class="update-form" enctype="multipart/form-data")
-                form(action=`http://localhost:3093/products/create`, method='POST' class="" enctype="multipart/form-data")
-                    p(class="form-desc") Тут можна створити новий пост
-                    div(class="text-input-element")
-                        label(for="title") Enter the title
-                        input(id="productTitle" type='text' name='title' value='' class="input-text")
+      div(id="content-container" class="update-content-container")
+        h5(class="delete-page-title") Для того щоб видалити товар на сайті введіть його ID двічі та натисніть кнопку "підтвердити"
+        //- form(action=`http://localhost:3093/products/create`, method='POST' class="update-form" enctype="multipart/form-data")
+        form(class="form")
+          p(class="form-desc") Тут можна створити новий пост
+          div(class="text-input-element")
+            label(for="productId") Enter product ID
+            input(id="updateProductId" type='text' name='productId' value='' class="input-text")
 
-                        label(for="title_en") Enter the en title
-                        input(id="productTitle" type='text' name='title_en' value='' class="input-text")
+          div(class="text-input-element")
+            label(for="title") Enter the title
+            input(id="updateProductTitle" type='text' name='title' value='' class="input-text")
 
-                    div(class="text-input-element")
-                        label(for="description") Enter the description
-                        textarea(id="productDesc" type='text' name='description' value='' class="input-text-area")
+            label(for="title_en") Enter the en title
+            input(id="updateProductTitleEn" type='text' name='title_en' value='' class="input-text")
 
-                        label(for="description_en") Enter the en  description
-                        textarea(id="productDesc" type='text' name='description_en' value='' class="input-text-area")
+          div(class="text-input-element")
+            label(for="description") Enter the description
+            textarea(id="updateProductDesc" type='text' name='description' value='' class="input-text-area")
 
-                    div(class="radio-btn-container")
-                        p(class="radio-desc") Виберіть тип продукту
-                        label(for="typeChoice1" class="radio-element") Для аграріїв
-                            input(type="radio" id="typeChoice1" name="product_type" value="for_farmers")
-                            span(class="checkmark")
+            label(for="description_en") Enter the en  description
+            textarea(id="updateProductDescEn" type='text' name='description_en' value='' class="input-text-area")
 
-                        label(for="typeChoice2" class="radio-element") Вимірювальні пристрої 
-                            input(type="radio" id="typeChoice2" name="product_type" value="measuring_device")
-                            span(class="checkmark")
+          div(class="radio-btn-container")
+            p(class="radio-desc") Виберіть тип продукту (обов'язково)
+            label(for="typeChoice1" class="radio-element") Для аграріїв
+              input(type="radio" id="typeChoice1" name="update_product_type" value="for_farmers")
+              span(class="checkmark")
 
-                        label(for="typeChoice3" class="radio-element") Інше
-                            input(type="radio" id="typeChoice3" name="product_type" value="other")
-                            span(class="checkmark")
+            label(for="typeChoice2" class="radio-element") Вимірювальні пристрої 
+              input(type="radio" id="typeChoice2" name="update_product_type" value="measuring_device")
+              span(class="checkmark")
 
-                    div(class="select-image-container")
-                        label(for="mediaFile") Оберіть медіа файл
-                        input(id="productImg" type='file' name='mediaFile')
+            label(for="typeChoice3" class="radio-element") Інше
+              input(type="radio" id="typeChoice3" name="update_product_type" value="other")
+              span(class="checkmark")
 
-                    input(type='submit' value='Submit' class="submit-btn")
-                div(id="error-container")
+            label(for="typeChoice4" class="radio-element") Не змінювати тип продукту
+              input(type="radio" id="typeChoice4" name="update_product_type" value="no change")
+              span(class="checkmark")
+
+          //- div(class="select-image-container")
+          //-     label(for="mediaFile") Оберіть медіа файл
+          //-     input(id="productImg" type='file' name='mediaFile')
+
+          //- input(type='submit' value='Submit' class="submit-btn")
+
+        button(onclick="updateProduct()" class="delete-submit-btn") підтвердити
+          //- button(onclick="updateProduct()" class="submit-btn") Submit
+        div(id="error-container")
 block scripts
-    //- script(src="https://unpkg.com/vue@3/dist/vue.global.js")
-    script(src="js/index.js")
-    script(src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.16/dist/sweetalert2.all.min.js")
-    script(src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous")
+  //- script(src="https://unpkg.com/vue@3/dist/vue.global.js")
+  script(src="js/index.js")
+  script(src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.16/dist/sweetalert2.all.min.js")
+  script(src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous")

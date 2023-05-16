@@ -104,16 +104,13 @@ function getAllProducts() {
 function createProductList(productList) {
   productList.forEach(element => {
     document.getElementById('products-container').innerHTML += `<li class="product-elem">Product title: ${element.title}<br><br>Product ID: ${element._id}</li>`;
-    console.log(element.title)
+    // console.log(element.title)
   });
 };
 
 function deleteProduct() {
   const deleteProductID = document.getElementById('product-id').value
   const deleteProductIDRep = document.getElementById('product-id-rep').value
-//   console.log(`first ID: ${deleteProductID} 
-// second ID: ${deleteProductIDRep}`)
-//   console.log(deleteProductID == deleteProductIDRep)
 
   if (deleteProductID != deleteProductIDRep) {
     return document.getElementById('error-container').innerHTML += `<h6 class="error-message">ID не співпадають. перевірте введені дані та спробуйте знову</h6>`;
@@ -146,6 +143,57 @@ function deleteProduct() {
       }
     };
   }
+}
 
+function updateProduct() {
+  const updateProductID = document.getElementById('updateProductId').value
 
+  if (!updateProductID) {
+    console.log('"ID" is required')
+    return document.getElementById('error-container').innerHTML += `<h6 class="error-message">ID - обов'язкове поле для заповнення. перевірте введені дані та спробуйте знову</h6>`;
+  }
+
+  const updateTitle = document.getElementById('updateProductTitle').value
+  const updateTitleEN = document.getElementById('updateProductTitleEn').value
+  const updateDescription = document.getElementById('updateProductDesc').value
+  const updateDescriptionEN = document.getElementById('updateProductDescEn').value
+  const typeValue = document.querySelector('input[name="update_product_type"]:checked').value
+  let updateType = null
+
+  typeValue == "no change" ? updateType = "" : updateType = typeValue
+
+  if (updateProductID) {
+    const xhttp = new XMLHttpRequest();
+    xhttp.open("POST", `http://localhost:3093/products/update`);
+    xhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+    xhttp.send(JSON.stringify({
+      "productId": updateProductID,
+      "title": updateTitle,
+      "title_en": updateTitleEN,
+      "description": updateDescription,
+      "description_en": updateDescriptionEN,
+      "product_type": updateType
+    }));
+    xhttp.onreadystatechange = function () {
+      if (this.readyState == 4) {
+        const objects = JSON.parse(this.responseText);
+        if (objects['success'] == true) {
+          console.log(objects['message'])
+          console.log(objects)
+          // document.cookie = "token=" + objects['token'];
+          Swal.fire({
+            text: objects['message'],
+            icon: 'success',
+            confirmButtonText: 'OK'
+          });
+        } else {
+          Swal.fire({
+            text: objects['message'],
+            icon: 'error',
+            confirmButtonText: 'OK'
+          });
+        }
+      }
+    };
+  }
 }

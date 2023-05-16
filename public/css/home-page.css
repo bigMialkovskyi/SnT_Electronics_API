@@ -1,0 +1,28 @@
+.nav-bar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: auto;
+}
+
+.nav-bar-elem {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1vh;
+    margin: 3vh;
+    background-color: #00bfff;
+    border-radius: 7px;
+    box-shadow: 0px -34px 34px rgba(0, 0, 255, 0.1) inset;
+    transition: padding 0.3s;
+}
+
+.nav-bar-icon {
+    height: 5vh;
+    width: 5vh;
+}
+
+.nav-bar-elem:hover {
+    background-color: #87cefa;
+    padding: 2vh;
+}

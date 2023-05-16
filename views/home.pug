@@ -1,60 +1,18 @@
 extends template.pug 
 block main
   #container(class="container")
-    //- form(action='https://snt-electronics.herokuapp.com/products/create', method='POST', class="form", enctype="multipart/form-data")
-    //- form(action=`https://api.sitrix.co.ua/products/create`, method='POST', class="form", enctype="multipart/form-data")
-    form(action=`http://localhost:3093/products/create`, method='POST', class="form", enctype="multipart/form-data")
-      p(class="form-desc") Тут можна створити новий пост
-      div(class="text-input-element")
-        label(for="title") Enter the title
-        input(id="productTitle", type='text', name='title', value='', class="input-text")
-
-        label(for="title_en") Enter the en title
-        input(id="productTitle", type='text', name='title_en', value='', class="input-text")
-
-      div(class="text-input-element")
-        label(for="description") Enter the description
-        textarea(id="productDesc", type='text', name='description', value='', class="input-text-area")
-
-        label(for="description_en") Enter the en  description
-        textarea(id="productDesc", type='text', name='description_en', value='', class="input-text-area")
-
-      div(class="radio-btn-container")
-        p(class="radio-desc") Виберіть тип продукту
-        label(for="typeChoice1", class="radio-element") Для аграріїв
-          input(type="radio", id="typeChoice1", name="product_type", value="for_farmers")
-          span(class="checkmark")
-
-        label(for="typeChoice2", class="radio-element") Вимірювальні пристрої 
-          input(type="radio", id="typeChoice2", name="product_type", value="measuring_device")
-          span(class="checkmark")
-
-        label(for="typeChoice3", class="radio-element") Інше
-          input(type="radio", id="typeChoice3", name="product_type", value="other")
-          span(class="checkmark")
-
-      div(class="select-image-container")
-        label(for="mediaFile") Оберіть медіа файл
-        input(id="productImg", type='file', name='mediaFile')
-
-      input(type='submit', value='Submit', class="submit-btn")
-
-    //- input(type='submit', onclick="getData()", class="submit-btn")
-
-  //-   h5 Hello #{name}
-  //- #app  {{message}}
-  //- script.
-  //-   const { createApp } = Vue
-  //-   createApp({
-  //-     data() {
-  //-       return {
-  //-         name: '#{name}',
-  //-         city: '#{city}'
-  //-       }
-  //-     },
-  //-     template: '<h1>OK, let`s go {{city}} #{city}</h1>'
-  //-   }).mount('#app')
-
+    div(class="nav-bar")
+      div( class="nav-bar-elem" )
+        //- a(href="http://localhost:3093/create-product-page")
+        a(href="https://api.sitrix.co.ua/create-product-page")
+          img( class="nav-bar-icon" src="./images/edit-boil.svg" alt="create")
+      div( class="nav-bar-elem" )
+        //- a(href="http://localhost:3093/update-product-page")
+        a(href="https://api.sitrix.co.ua/update-product-page")
+          img( class="nav-bar-icon" src="./images/gear.svg" alt="edit")
+      div( class="nav-bar-elem" )
+        //- a(href="http://localhost:3093/delete-product-page")
+        a(href="https://api.sitrix.co.ua/delete-product-page")
+          img( class="nav-bar-icon" src="./images/trash.svg" alt="delete")
 block scripts
-  //- script(src="https://unpkg.com/vue@3/dist/vue.global.js")
   script(src="js/index.js")

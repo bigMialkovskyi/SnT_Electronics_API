@@ -106,7 +106,7 @@ body {
 
 .container {
   /* height: calc(100% - 120px); */
-  height: 90%;
+  min-height: 90%;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -130,6 +130,8 @@ body {
 .input-text {
   border: 1px solid black;
   width: 500px;
+  resize: none;
+  /* max-width: 500px; */
   height: 3em;
   border-radius: 7px;
 }
@@ -138,7 +140,9 @@ body {
   border: 1px solid black;
   width: 500px;
   max-width: 500px;
+  /* resize: none; */
   height: 15em;
+  max-height: 15em;
   min-height: 3em;
   border-radius: 7px;
 }
@@ -151,19 +155,19 @@ body {
   background-color: #45a049;
 }
 
-.text-input-element{
+.text-input-element {
   display: flex;
   flex-direction: column;
 }
 
-.select-image-container{
+.select-image-container {
   display: flex;
   flex-direction: column;
 }
 
 /* Customize the label (the container) */
 
-.radio-desc{
+.radio-desc {
   font-size: 22px;
 }
 
@@ -200,12 +204,12 @@ body {
 }
 
 /* On mouse-over, add a grey background color */
-.radio-element:hover input ~ .checkmark {
+.radio-element:hover input~.checkmark {
   background-color: #ccc;
 }
 
 /* When the checkbox is checked, add a blue background */
-.radio-element input:checked ~ .checkmark {
+.radio-element input:checked~.checkmark {
   background-color: #2196F3;
 }
 
@@ -217,7 +221,7 @@ body {
 }
 
 /* Show the checkmark when checked */
-.radio-element input:checked ~ .checkmark:after {
+.radio-element input:checked~.checkmark:after {
   display: block;
 }
 

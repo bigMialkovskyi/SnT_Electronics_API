@@ -46,6 +46,10 @@ app.get('/home', middlewares.verifyAuth.admin, (req, res) => {
   res.render('home', {});
 });
 
+app.get('/create-product-page', middlewares.verifyAuth.admin, (req, res) => {
+  res.render('createProductPage', {});
+});
+
 app.get('/update-product-page', middlewares.verifyAuth.admin, (req, res) => {
   res.render('updateProductPage', {});
 });

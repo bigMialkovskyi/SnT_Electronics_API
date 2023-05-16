@@ -8,16 +8,17 @@ html(lang="en")
     block styles
     link(rel="stylesheet" href="./css/main.css")
     link(rel="stylesheet" href="./css/header.css")
+    link(rel="stylesheet" href="./css/home-page.css")
     link(rel="stylesheet" href="./css/delete-page.css")
     link(rel="stylesheet" href="./css/update-page.css")
     link(rel="icon" type="image/x-icon" href="./images/favicon.png")
   body(onload="getAllProducts()")
     header( class="header" )
       h6 This is your header
-      div( class="delete-product-elem" )
-        a(href="http://localhost:3093/delete-product-page")
-          //- img( class="delete-page-icon" src="./images/gear.svg" alt="gear")
-          img( class="delete-page-icon" src="./images/trash.svg" alt="trash")
+      div( class="header-nav-bar-elem" )
+        //- a(href="http://localhost:3093/home")
+        a(href="https://api.sitrix.co.ua/home")
+          img( class="nav-bar-icon" src="./images/home.svg" alt="trash")
     block scripts
     block main
     footer( class="footer" )

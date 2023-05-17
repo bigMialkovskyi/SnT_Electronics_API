@@ -15,8 +15,8 @@ function loginAdmin() {
 
   const xhttp = new XMLHttpRequest();
   // xhttp.open("POST", `http://664326-vds-dm.penzyakov.gmhost.pp.ua:3093/auth/admins/login`); localhost:3093
-  // xhttp.open("POST", `  https://api.sitrix.co.ua/auth/admins/login`);
-  xhttp.open("POST", `  https://localhost:3093/auth/admins/login`);
+  xhttp.open("POST", `  https://api.sitrix.co.ua/auth/admins/login`);
+  // xhttp.open("POST", `  https://localhost:3093/auth/admins/login`);
   xhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
   xhttp.send(JSON.stringify({
     "login": adminLogin,
@@ -54,8 +54,8 @@ function registerAdmin() {
 
   const xhttp = new XMLHttpRequest();
   // xhttp.open("POST", `http://664326-vds-dm.penzyakov.gmhost.pp.ua:3093/auth/admins/register`);localhost:3093
-  // xhttp.open("POST", `https://api.sitrix.co.ua/auth/admins/register`);
-  xhttp.open("POST", `https://localhost:3093/auth/admins/register`);
+  xhttp.open("POST", `https://api.sitrix.co.ua/auth/admins/register`);
+  // xhttp.open("POST", `https://localhost:3093/auth/admins/register`);
   xhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
   xhttp.send(JSON.stringify({
     "login": adminLogin,
@@ -89,8 +89,8 @@ function registerAdmin() {
 
 function getAllProducts() {
   const xhr = new XMLHttpRequest();
-  xhr.open("GET", "https://localhost:3093/products/get/all");
-  // xhr.open("GET", "https://api.sitrix.co.ua/products/get/all");
+  // xhr.open("GET", "https://localhost:3093/products/get/all");
+  xhr.open("GET", "https://api.sitrix.co.ua/products/get/all");
   xhr.send();
   xhr.responseType = "json";
   xhr.onload = () => {
@@ -122,8 +122,8 @@ function deleteProduct() {
   if (deleteProductID == deleteProductIDRep) {
     const xhttp = new XMLHttpRequest();
 
-    // xhttp.open("DELETE", `https://api.sitrix.co.ua/products/delete/${deleteProductID}`); localhost:3093
-    xhttp.open("DELETE", `https://localhost:3093/products/delete/${deleteProductID}`);
+    xhttp.open("DELETE", `https://api.sitrix.co.ua/products/delete/${deleteProductID}`); 
+    // xhttp.open("DELETE", `https://localhost:3093/products/delete/${deleteProductID}`);
     xhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
     xhttp.send();
     xhttp.onreadystatechange = function () {
@@ -168,8 +168,8 @@ function updateProduct() {
 
   if (updateProductID) {
     const xhttp = new XMLHttpRequest();
-    // xhttp.open("POST", `https://api.sitrix.co.ua/products/update`); localhost:3093
-    xhttp.open("POST", `https://localhost:3093/products/update`);
+    xhttp.open("POST", `https://api.sitrix.co.ua/products/update`); 
+    // xhttp.open("POST", `https://localhost:3093/products/update`);
     xhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
     xhttp.send(JSON.stringify({
       "productId": updateProductID,

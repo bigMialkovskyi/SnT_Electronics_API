@@ -3,6 +3,7 @@ const jwt = require('jsonwebtoken')
 
 module.exports = async (req, res) => {
     try {
+        console.log(req.body)
         // получаем данные из body запроса
         const { login, password } = req.body
 

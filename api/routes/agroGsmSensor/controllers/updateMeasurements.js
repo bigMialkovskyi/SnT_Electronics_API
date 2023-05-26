@@ -1,9 +1,9 @@
 module.exports = async (req, res) => {
   try {
-
     // отримуємо дані з тіла зампиту
     const { identity, airTemperature, soilTemperature, humidity, pressure,  batteryStatus} = req.body
 
+    if (!identity) return res.status(400).send({ success: false, error: '"identity" is required' })
     // перевіряємо чи такий датчик існує
     const existSensor = await db.agroGsmSensors.findOne({ identity })
     if (!existSensor) return res.status(400).send({ success: false, error: 'sensor with this identity does not exist' })

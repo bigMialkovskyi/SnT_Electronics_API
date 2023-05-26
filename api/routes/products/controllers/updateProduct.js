@@ -2,11 +2,6 @@ module.exports = async (req, res) => {
   try {
     const { productId, title, title_en, description, description_en, product_type } = req.body
 
-    console.log(req.body)
-
-    // console.log(productId)
-    // console.log(title)
-
     if (!productId) return res.status(400).send({ success: false, error: '"ID" is required' })
     const product = await db.products.findOne({ _id: productId })
     if (!product) return res.status(400).send({ success: false, message: 'product not exist' })

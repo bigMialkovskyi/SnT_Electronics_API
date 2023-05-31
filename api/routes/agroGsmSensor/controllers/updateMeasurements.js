@@ -1,7 +1,15 @@
 module.exports = async (req, res) => {
   try {
     // отримуємо дані з тіла зампиту
-    const { identity, airTemperature, soilTemperature, humidity, pressure,  batteryStatus} = req.body
+    // const { identity, airTemperature, soilTemperature, humidity, pressure,  batteryStatus} = req.body
+    const { idnt, airtemp, soiltemp, humid, pess, batst } = req.body
+
+    const identity = idnt
+    const airTemperature = airtemp
+    const soilTemperature = soiltemp
+    const humidity = humid
+    const pressure = pess
+    const batteryStatus = batst
 
     if (!identity) return res.status(400).send({ success: false, error: '"identity" is required' })
     // перевіряємо чи такий датчик існує

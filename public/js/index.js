@@ -122,7 +122,7 @@ function deleteProduct() {
   if (deleteProductID == deleteProductIDRep) {
     const xhttp = new XMLHttpRequest();
 
-    xhttp.open("DELETE", `https://api.sitrix.co.ua/products/delete/${deleteProductID}`); 
+    xhttp.open("DELETE", `https://api.sitrix.co.ua/products/delete/${deleteProductID}`);
     // xhttp.open("DELETE", `https://localhost:3093/products/delete/${deleteProductID}`);
     xhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
     xhttp.send();
@@ -168,7 +168,7 @@ function updateProduct() {
 
   if (updateProductID) {
     const xhttp = new XMLHttpRequest();
-    xhttp.open("POST", `https://api.sitrix.co.ua/products/update`); 
+    xhttp.open("POST", `https://api.sitrix.co.ua/products/update`);
     // xhttp.open("POST", `https://localhost:3093/products/update`);
     xhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
     xhttp.send(JSON.stringify({
@@ -201,4 +201,20 @@ function updateProduct() {
       }
     };
   }
+}
+
+
+function addSpec() {
+  const specList = document.getElementById('specContainer')
+  specList.innerHTML += '<div class="text-input-element spec-elem" id="spec-elem"><label for="spec-name">Enter the specification name</label><input class="input-text" id="updSpecName" type="text" name="spec-name" value="" /><label for="spec-vall">Enter the en specification vallue</label><input class="input-text" id="updSpecVall" type="text" name="spec-vall" value="" /></div>'
+}
+
+function rmSpec() {
+  const specList = document.getElementById('specContainer')
+  specList.removeChild(specList.lastChild);
+}
+
+function getSpec() {
+  const specVall = document.getElementsByClassName("spec-vall");
+  console.log(specVall)
 }

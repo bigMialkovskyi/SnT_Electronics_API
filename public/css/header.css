@@ -1,12 +1,24 @@
 .header {
+    min-height: 7vh;
+    max-height: 10vh;
     display: flex;
     align-items: center;
-    justify-content: end;
+    justify-content: space-between;
     padding: 2vh;
 }
 
+.logo-container {
+    display: flex;
+    align-items: center;
+}
+
+.logo-name {
+    margin: 1vh;
+}
+
 .header-nav-bar-elem {
-    height: 1vh;
+    /* height: 1vh; */
+    min-height: 5vh;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -20,6 +32,8 @@
 .header-nav-bar-icon {
     height: 3vh;
     width: 3vh;
+    max-height: 3vh;
+    max-width: 3vh;
 }
 
 .header-nav-bar-elem:hover {

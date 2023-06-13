@@ -5,10 +5,10 @@ block main
       ol(id="products-container" class="update-products-container")
 
       div(id="content-container" class="update-content-container")
-        h5(class="delete-page-title") Для того щоб видалити товар на сайті введіть його ID двічі та натисніть кнопку "підтвердити"
+        h5(class="delete-page-title") Тут можна редагувати вже наявний товар  
         //- form(action=`http://localhost:3093/products/create`, method='POST' class="update-form" enctype="multipart/form-data")
         form(class="form")
-          p(class="form-desc") Тут можна створити новий пост
+          p(class="form-desc") Щоб редагувати товар спочатку введіть його ID
           div(class="text-input-element")
             label(for="productId") Enter product ID
             input(id="updateProductId" type='text' name='productId' value='' class="input-text")
@@ -45,14 +45,21 @@ block main
               input(type="radio" id="typeChoice4" name="update_product_type" value="no change")
               span(class="checkmark")
 
-          //- div(class="select-image-container")
-          //-     label(for="mediaFile") Оберіть медіа файл
-          //-     input(id="productImg" type='file' name='mediaFile')
+          div( id="specContainer" class="spec-container")
+            div(id="spec-elem" class="text-input-element spec-elem")
+              label(for="spec-name") Enter the specification name
+              input(id="updSpecName" type='text' name='spec-name' value='' class="input-text spec-name")
 
-          //- input(type='submit' value='Submit' class="submit-btn")
+              label(for="spec-vall") Enter the en specification vallue
+              input(id="updSpecVall" type='text' name='spec-vall' value='' class="input-text spec-vall")
+
+        div 
+          button( id="specBtn" onclick="addSpec()" class="delete-submit-btn" style="width: 5vw; margin: 0 1vw;") +
+          button( id="specBtnRm" onclick="rmSpec()" class="delete-submit-btn" style="background-color: red; color: white; width: 5vw; margin: 0 1vw" ) -
+          button( id="specBtn" onclick="getSpec()" class="delete-submit-btn" style="width: 5vw; margin: 0 1vw;") ^_^
 
         button(onclick="updateProduct()" class="delete-submit-btn") підтвердити
-          //- button(onclick="updateProduct()" class="submit-btn") Submit
+
         div(id="error-container")
 block scripts
   //- script(src="https://unpkg.com/vue@3/dist/vue.global.js")

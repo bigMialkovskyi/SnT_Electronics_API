@@ -104,6 +104,14 @@ body {
   align-items: center;
 }
 
+.favicon {
+  border-radius: 7px;
+  height: 5vh;
+  width: 5vh;
+  max-height: 5vh;
+  max-width: 5vh;
+}
+
 .container {
   /* height: calc(100% - 120px); */
   min-height: 90%;
@@ -122,6 +130,7 @@ body {
 }
 
 .form-desc {
+  margin-top: 1vh;
   font-size: 16px;
   margin-left: auto;
   margin-right: auto;

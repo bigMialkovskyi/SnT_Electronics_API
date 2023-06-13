@@ -18,6 +18,10 @@ module.exports = function (mongoose, connection) {
       type: String,
       required: true
     },
+    specifications: [{
+      name: String,
+      vallue: String
+    }],
     media: {
       type: mongoose.Schema.Types.ObjectId,
       ref: 'files',

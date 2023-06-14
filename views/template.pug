@@ -15,13 +15,13 @@ html(lang="en")
   body(onload="getAllProducts()")
     header( class="header" )
       div( class="logo-container")  
-        img( class="favicon" src="./images/favicon.png" alt="trash")
+        img( class="favicon" src="./images/favicon.png" alt="logo")
         h6(class="logo-name") SITRIX
       div( class="header-nav-bar-elem" )
-        //- a(href="https://api.sitrix.co.ua/home") 
         a(href="https://localhost:3093/home")
-          img( class="header-nav-bar-icon" src="./images/home.svg" alt="trash")
+        a(href="https://api.sitrix.co.ua/home") 
+          img( class="header-nav-bar-icon" src="./images/home.svg" alt="home")
     block scripts
     block main
     footer( class="footer" )
-      img( class="favicon" src="./images/favicon.png" alt="trash")
+      img( class="favicon" src="./images/favicon.png" alt="logo")

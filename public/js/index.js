@@ -215,6 +215,12 @@ function rmSpec() {
 }
 
 function getSpec() {
+  // const specVall = document.getElementsByClassName("spec-vall")[0].value;
   const specVall = document.getElementsByClassName("spec-vall");
-  console.log(specVall)
+  // console.log(typeof (specVall))
+  // console.log(specVall)
+  Object.keys(specVall).forEach(item => {
+    console.log(item.valueOf)
+  })
+  // console.log(specVall)
 }

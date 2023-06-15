@@ -9,7 +9,7 @@ module.exports = function (mongoose, connection) {
     description: {
       type: String,
       required: true
-    }, 
+    },
     title_en: {
       type: String,
       required: true
@@ -20,7 +20,9 @@ module.exports = function (mongoose, connection) {
     },
     specifications: [{
       name: String,
-      vallue: String
+      value: String,
+      name_en: String,
+      value_en: String
     }],
     media: {
       type: mongoose.Schema.Types.ObjectId,

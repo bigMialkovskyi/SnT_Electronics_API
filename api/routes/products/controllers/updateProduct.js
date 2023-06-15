@@ -1,6 +1,6 @@
 module.exports = async (req, res) => {
   try {
-    const { productId, title, title_en, description, description_en, product_type } = req.body
+    const { productId, title, title_en, description, description_en, product_type, specifications } = req.body
 
     if (!productId) return res.status(400).send({ success: false, error: '"ID" is required' })
     const product = await db.products.findOne({ _id: productId })
@@ -14,7 +14,6 @@ module.exports = async (req, res) => {
     if (title_en) {
       if (title_en.length < 6) return res.status(400).send({ success: false, error: 'en title lenght must be bigger then 6 symbols' })
       await db.products.updateOne({ _id: productId }, { title_en })
-
     }
     if (description) {
       if (description.length < 8) return res.status(400).send({ success: false, error: 'description length must be bigger then 8 symbols' })
@@ -23,6 +22,10 @@ module.exports = async (req, res) => {
     if (description_en) {
       if (description_en.length < 8) return res.status(400).send({ success: false, error: 'en description length must be bigger then 8 symbols' })
       await db.products.updateOne({ _id: productId }, { description_en })
+    }
+    if (specifications) {
+      if (specifications.length < 1) return res.status(400).send({ success: false, error: 'the array with characteristics must contain at least one element' })
+      await db.products.updateOne({ _id: productId }, { specifications })
     }
     if (product_type) await db.products.updateOne({ _id: productId }, { product_type })
 

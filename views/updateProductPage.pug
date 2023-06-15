@@ -49,9 +49,13 @@ block main
             div(id="spec-elem" class="text-input-element spec-elem")
               label(for="spec-name") Enter the specification name
               input(id="updSpecName" type='text' name='spec-name' value='' class="input-text spec-name")
+              label(for="spec-name") Enter the en specification name
+              input(id="updSpecName" type='text' name='spec-name' value='' class="input-text spec-en-name")
 
+              label(for="spec-vall") Enter the specification vallue
+              input(id="updSpecVall" type='text' name='spec-vall' value='' class="input-text spec-val")
               label(for="spec-vall") Enter the en specification vallue
-              input(id="updSpecVall" type='text' name='spec-vall' value='' class="input-text spec-vall")
+              input(id="updSpecVall" type='text' name='spec-vall' value='' class="input-text spec-en-val")
 
         div 
           button( id="specBtn" onclick="addSpec()" class="delete-submit-btn" style="width: 5vw; margin: 0 1vw;") +

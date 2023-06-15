@@ -168,8 +168,8 @@ function updateProduct() {
 
   if (updateProductID) {
     const xhttp = new XMLHttpRequest();
-    xhttp.open("POST", `https://api.sitrix.co.ua/products/update`);
-    // xhttp.open("POST", `https://localhost:3093/products/update`);
+    // xhttp.open("POST", `https://api.sitrix.co.ua/products/update`);
+    xhttp.open("POST", `http://localhost:3093/products/update`);
     xhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
     xhttp.send(JSON.stringify({
       "productId": updateProductID,
@@ -177,7 +177,8 @@ function updateProduct() {
       "title_en": updateTitleEN,
       "description": updateDescription,
       "description_en": updateDescriptionEN,
-      "product_type": updateType
+      "product_type": updateType,
+      "specifications": getSpec()
     }));
     xhttp.onreadystatechange = function () {
       if (this.readyState == 4) {
@@ -206,7 +207,19 @@ function updateProduct() {
 
 function addSpec() {
   const specList = document.getElementById('specContainer')
-  specList.innerHTML += '<div class="text-input-element spec-elem" id="spec-elem"><label for="spec-name">Enter the specification name</label><input class="input-text" id="updSpecName" type="text" name="spec-name" value="" /><label for="spec-vall">Enter the en specification vallue</label><input class="input-text" id="updSpecVall" type="text" name="spec-vall" value="" /></div>'
+  specList.innerHTML += `<div class="text-input-element spec-elem" id="spec-elem">
+
+  <label for="spec-name">Enter the specification name</label>
+  <input class="input-text spec-name" id="updSpecName" type="text" name="spec-name" value="" />
+  <label for="spec-name">Enter the en specification name</label>
+  <input class="input-text spec-en-name" id="updSpecName" type="text" name="spec-name" value="" />
+
+  <label for="spec-vall">Enter the specification vallue</label>
+  <input class="input-text spec-val" id="updSpecVall" type="text" name="spec-vall" value="" />
+  <label for="spec-vall">Enter the en specification vallue</label>
+  <input class="input-text spec-en-val" id="updSpecVall" type="text" name="spec-vall" value="" />
+
+  </div>`
 }
 
 function rmSpec() {
@@ -215,12 +228,19 @@ function rmSpec() {
 }
 
 function getSpec() {
-  // const specVall = document.getElementsByClassName("spec-vall")[0].value;
-  const specVall = document.getElementsByClassName("spec-vall");
-  // console.log(typeof (specVall))
-  // console.log(specVall)
-  Object.keys(specVall).forEach(item => {
-    console.log(item.valueOf)
-  })
-  // console.log(specVall)
+  const specName = document.getElementsByClassName("spec-name");
+  const specVal = document.getElementsByClassName("spec-val");
+  const specNameEn = document.getElementsByClassName("spec-en-name");
+  const specValEn = document.getElementsByClassName("spec-en-val");
+  let specList = []
+
+  for (elem = 0; elem < specVal.length; elem++) {
+    specList.push({
+      name: specName[elem].value,
+      value: specVal[elem].value,
+      name_en: specNameEn[elem].value,
+      value_en: specValEn[elem].value
+    })
+  }
+  return specList
 }

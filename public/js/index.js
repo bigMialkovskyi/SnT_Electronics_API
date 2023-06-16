@@ -168,8 +168,8 @@ function updateProduct() {
 
   if (updateProductID) {
     const xhttp = new XMLHttpRequest();
-    // xhttp.open("POST", `https://api.sitrix.co.ua/products/update`);
-    xhttp.open("POST", `http://localhost:3093/products/update`);
+    xhttp.open("POST", `https://api.sitrix.co.ua/products/update`);
+    // xhttp.open("POST", `http://localhost:3093/products/update`);
     xhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
     xhttp.send(JSON.stringify({
       "productId": updateProductID,

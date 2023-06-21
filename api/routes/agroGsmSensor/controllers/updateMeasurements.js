@@ -4,8 +4,10 @@ module.exports = async (req, res) => {
     // const { identity, airTemperature, soilTemperature, humidity, pressure,  batteryStatus} = req.body
     const { idnt, airtemp, soiltemp, humid, pess, batst } = req.body
 
-    console.log('REQ HERE', req)
+    // console.log('REQ HERE', req)
     console.log('REQ BODY HERE', req.body)
+    console.log('REQ IDNT HERE', req.body.idnt)
+    console.log('REQ IDNT TYPE HERE', typeof req.body.idnt)
 
     const identity = idnt
     const airTemperature = airtemp

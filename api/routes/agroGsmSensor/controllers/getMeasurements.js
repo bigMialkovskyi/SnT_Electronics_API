@@ -13,7 +13,7 @@ module.exports = async (req, res) => {
       const result = {
         id: sensor.id,
         identity: sensor.identity,
-        measurements: sensor.measurements.slice(-100),
+        measurements: sensor.measurements,
         name: sensor.name,
         batteryStatus: sensor.batteryStatus
       }

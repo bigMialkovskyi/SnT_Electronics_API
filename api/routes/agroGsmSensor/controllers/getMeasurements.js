@@ -10,15 +10,28 @@ module.exports = async (req, res) => {
 
     let measForRespose = await Promise.all(sensorsList.map(async (element) => {
       const sensor = await db.agroGsmSensors.findOne({ _id: element })
-      const result = {
-        id: sensor.id,
-        identity: sensor.identity,
-        measurements: sensor.measurements,
-        name: sensor.name,
-        batteryStatus: sensor.batteryStatus
+      let result
+      if (sensor.measurements.length) {
+         result = {
+          id: sensor.id,
+          identity: sensor.identity,
+          measurements: sensor.measurements.slice(-100),
+          name: sensor.name,
+          batteryStatus: sensor.batteryStatus
+        }
       }
+      else {
+        result = {
+          id: sensor.id,
+          identity: sensor.identity,
+          measurements: sensor.measurements,
+          name: sensor.name,
+          batteryStatus: sensor.batteryStatus
+        }
+      }
+
       return result
-    })) 
+    }))
 
     // отправляем информацию о созданом продукте в качестве ответа на запрос
     res.send({ success: true, message: 'measurements successfully obtained', measForRespose })

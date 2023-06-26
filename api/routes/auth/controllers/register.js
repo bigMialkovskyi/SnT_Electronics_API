@@ -75,11 +75,11 @@ module.exports = async (req, res) => {
 
         // send mail with defined transport object
         let info = await transporter.sendMail({
-            from: `SnT Electronics <${process.env.EMAIL}>`, // sender address
+            from: `SITRIX <${process.env.EMAIL}>`, // sender address
             to: String(email), // list of receivers
             subject: "Confirm your email", // Subject line
             text: `Hello`, // plain text body
-            html: `<b>Hello. Welcome to the SnT Electronics team. The last step remains. Follow the link to activate your email: <a href="${activationLink}">${activationLink}</a></b>`, // html body
+            html: `<b>Hello. Welcome to the SITRIX team. The last step remains. Follow the link to activate your email: <a href="${activationLink}">${activationLink}</a></b>`, // html body
         });
 
         console.log("Message sent: %s", info.messageId);

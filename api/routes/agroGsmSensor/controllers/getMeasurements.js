@@ -11,23 +11,12 @@ module.exports = async (req, res) => {
     let measForRespose = await Promise.all(sensorsList.map(async (element) => {
       const sensor = await db.agroGsmSensors.findOne({ _id: element })
       let result
-      if (sensor.measurements.length > 99) {
-         result = {
-          id: sensor.id,
-          identity: sensor.identity,
-          measurements: sensor.measurements.slice(100),
-          name: sensor.name,
-          batteryStatus: sensor.batteryStatus
-        }
-      }
-      else {
-        result = {
-          id: sensor.id,
-          identity: sensor.identity,
-          measurements: sensor.measurements,
-          name: sensor.name,
-          batteryStatus: sensor.batteryStatus
-        }
+      result = {
+        id: sensor.id,
+        identity: sensor.identity,
+        measurements: sensor.measurements.slice(100),
+        name: sensor.name,
+        batteryStatus: sensor.batteryStatus
       }
 
       return result

@@ -2,19 +2,31 @@ module.exports = async (req, res) => {
   try {
     // отримуємо дані з тіла зампиту
     // const { identity, airTemperature, soilTemperature, humidity, pressure,  batteryStatus} = req.body
-    const { idnt, airtemp, soiltemp, humid, pess, batst } = req.body
+    const { idnt, airtemp, soiltemp, humid, press, batst } = req.body
 
     // console.log('REQ HERE', req)
     console.log('REQ BODY HERE', req.body)
     console.log('REQ IDNT HERE', req.body.idnt)
     console.log('REQ IDNT TYPE HERE', typeof req.body.idnt)
 
+
     const identity = idnt
-    const airTemperature = airtemp
-    const soilTemperature = soiltemp
-    const humidity = humid
-    const pressure = pess
-    const batteryStatus = batst
+    let airTemperature
+    let soilTemperature
+    let humidity
+    let pressure
+    let batteryStatus
+
+    if (typeof airtemp == "number" ) airTemperature = airtemp.toString()
+    if (typeof soiltemp == "number" ) soilTemperature = soiltemp.toString()
+    if (typeof humid == "number" ) humidity = humid.toString()
+    if (typeof press == "number" ) pressure = press.toString()
+    if (typeof batst == "number" ) batteryStatus = batst.toString()
+
+    // const soilTemperature = soiltemp
+    // const humidity = humid
+    // const pressure = pess
+    // const batteryStatus = batst
 
     if (!identity) return res.status(400).send({ success: false, error: '"identity" is required' })
     // перевіряємо чи такий датчик існує

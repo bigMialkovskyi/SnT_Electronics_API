@@ -27,13 +27,13 @@ module.exports = async (req, res) => {
         const existEmail = await db.users.findOne({ email })
         if (existEmail) return res.status(400).send({ success: false, error: 'user with this email already exist' })
         // перевіряємо чи такий доатчик існує
-        const existSensor = await db.agroGsmSensors.findOne({ identity })
+        const existSensor = await db.agroGsmSensors.findOne({ identity: sensorID })
         if (!existSensor) return res.status(400).send({ success: false, error: 'sensor with this identity does not exist' })
         //перевіряємо чи данай деваайс уже підключено до іншого користувача
         if (existSensor.user) return res.status(400).send({ success: false, error: 'this device is already connected to another account' })
 
         // перевіряємо чи девайс уже підключено до даного користувача
-        if (existUser.devices.some((id) => { return id.equals(existSensor._id) })) return res.status(400).send({ success: false, error: 'you are already connected to this device' })
+        // if (existUser.devices.some((id) => { return id.equals(existSensor._id) })) return res.status(400).send({ success: false, error: 'you are already connected to this device' })
 
         // шифруємо пароль
         const encryptedPassword = await store.common.actions.ENCRYPT_PASSWORD(password)
@@ -49,8 +49,9 @@ module.exports = async (req, res) => {
         await newUser.save()
 
         // створюємо лінк для активації пошти користувача
-        const encryptedEmail = await store.common.actions.ENCRYPT_PASSWORD(email)
-        const activationLink = `${process.env.HOST}:${process.env.PORT}/auth/confirm-email/${encryptedEmail}`
+        const encryptedEmail = encodeURI(await store.common.actions.ENCRYPT_PASSWORD(email))
+        console.log(encryptedEmail)
+        const activationLink = `${process.env.ACTIVATION_LINK_BASE_URL}/auth/confirm-email/${encryptedEmail}`
 
         // створюємо запис активації в БД 
         const newActivationRecord = new db.emailConfirm({

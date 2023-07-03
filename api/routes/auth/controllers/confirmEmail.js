@@ -4,11 +4,11 @@ module.exports = async (req, res) => {
         const email = req.params.encryptedEmail
 
         // шукаємо в БД запис для активації користувача
-        const confirmElement = await db.emailConfirm.findOne({ encryptedEmail: email }).select('userID')
+        const confirmElement = await db.emailConfirm.findOne({ encryptedEmail: email })
         if (!confirmElement) return res.status(400).send({ success: false, message: 'DB error. Try again later or try create new account.' })
 
         const identity = confirmElement.sensorID
-        const existSensor = await db.agroGsmSensors.findOne({ identity })
+            const existSensor = await db.agroGsmSensors.findOne({ identity })
         if (!existSensor) return res.status(400).send({ success: false, error: 'sensor with this identity does not exist' })
         // створємо фільтр пошуку та параметр редагування запису користувача
         const filter = { _id: confirmElement.userID }

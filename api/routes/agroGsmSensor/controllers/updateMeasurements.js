@@ -9,7 +9,6 @@ module.exports = async (req, res) => {
     console.log('REQ IDNT HERE', req.body.idnt)
     console.log('REQ IDNT TYPE HERE', typeof req.body.idnt)
 
-
     const identity = idnt
     let airTemperature
     let soilTemperature
@@ -22,11 +21,6 @@ module.exports = async (req, res) => {
     if (typeof humid == "number" ) humidity = humid.toString()
     if (typeof press == "number" ) pressure = press.toString()
     if (typeof batst == "number" ) batteryStatus = batst.toString()
-
-    // const soilTemperature = soiltemp
-    // const humidity = humid
-    // const pressure = pess
-    // const batteryStatus = batst
 
     if (!identity) return res.status(400).send({ success: false, error: '"identity" is required' })
     // перевіряємо чи такий датчик існує

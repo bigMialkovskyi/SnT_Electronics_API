@@ -15,11 +15,11 @@ module.exports = async (req, res) => {
     let pressure
     let batteryStatus
 
-    if (typeof airtemp == "number" ) airTemperature = airtemp.toString()
-    if (typeof soiltemp == "number" ) soilTemperature = soiltemp.toString()
-    if (typeof humid == "number" ) humidity = humid.toString()
-    if (typeof press == "number" ) pressure = press.toString()
-    if (typeof batst == "number" ) batteryStatus = batst.toString()
+    if (typeof airtemp == "number") airTemperature = airtemp.toString()
+    if (typeof soiltemp == "number") soilTemperature = soiltemp.toString()
+    if (typeof humid == "number") humidity = humid.toString()
+    if (typeof press == "number") pressure = press.toString()
+    if (typeof batst == "number") batteryStatus = batst.toString()
 
     if (!identity) return res.status(400).send({ success: false, error: '"identity" is required' })
     // перевіряємо чи такий датчик існує
@@ -56,6 +56,7 @@ module.exports = async (req, res) => {
     // отправляем информацию о созданом продукте в качестве ответа на запрос
     res.send({ success: true, message: 'measurments updated' })
   } catch (error) {
+    console.log('REQ HERE', req)
     console.error(error)
     res.status(500).send({ success: false, error: 'Internal server error' })
   }

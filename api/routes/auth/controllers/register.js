@@ -49,7 +49,7 @@ module.exports = async (req, res) => {
         await newUser.save()
 
         // створюємо лінк для активації пошти користувача
-        const encryptedEmail = encodeURI(await store.common.actions.ENCRYPT_PASSWORD(email))
+        const encryptedEmail = encodeURI(await store.common.actions.ENCRYPT_PASSWORD(email)).replace(/[;,/?:@&=+$]/g, "")
         console.log(encryptedEmail)
         const activationLink = `${process.env.ACTIVATION_LINK_BASE_URL}/auth/confirm-email/${encryptedEmail}`
 

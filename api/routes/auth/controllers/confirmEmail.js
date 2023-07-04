@@ -10,7 +10,27 @@ module.exports = async (req, res) => {
         const identity = confirmElement.sensorID
         const existSensor = await db.agroGsmSensors.findOne({ identity })
         if (!existSensor) return res.status(400).send({ success: false, error: 'sensor with this identity does not exist' })
-        existSensor.name = identity
+
+        if (!existSensor.measurements.length) {
+            let airTemperature = 0
+            let soilTemperature = 0
+            let humidity = 0
+            let pressure = 0
+            let batteryStatus = 0
+            const updateTime = new Date().toString();
+
+            existSensor.measurements = [
+                {
+                    airTemperature,
+                    soilTemperature,
+                    humidity,
+                    pressure,
+                    updateTime,
+                },
+                ...existSensor.measurements
+            ]
+            existSensor.batteryStatus = batteryStatus
+        }
 
         // створємо фільтр пошуку та параметр редагування запису користувача
         const filter = { _id: confirmElement.userID }

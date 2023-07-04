@@ -8,8 +8,10 @@ module.exports = async (req, res) => {
         if (!confirmElement) return res.status(400).send({ success: false, message: 'DB error. Try again later or try create new account.' })
 
         const identity = confirmElement.sensorID
-            const existSensor = await db.agroGsmSensors.findOne({ identity })
+        const existSensor = await db.agroGsmSensors.findOne({ identity })
         if (!existSensor) return res.status(400).send({ success: false, error: 'sensor with this identity does not exist' })
+        existSensor.name = identity
+
         // створємо фільтр пошуку та параметр редагування запису користувача
         const filter = { _id: confirmElement.userID }
         const update = { confirmed: true }

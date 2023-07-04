@@ -4,7 +4,7 @@ module.exports = async (req, res) => {
     // const { identity, airTemperature, soilTemperature, humidity, pressure,  batteryStatus} = req.body
     const { idnt, airtemp, soiltemp, humid, press, batst } = req.body
 
-    console.log('REQ HERE', req)
+    // console.log('REQ HERE', req)
     console.log('REQ BODY HERE', req.body)
     console.log('REQ IDNT HERE', req.body.idnt)
 
@@ -56,7 +56,6 @@ module.exports = async (req, res) => {
     // отправляем информацию о созданом продукте в качестве ответа на запрос
     res.send({ success: true, message: 'measurments updated' })
   } catch (error) {
-    console.log('REQ HERE', req)
     console.error(error)
     res.status(500).send({ success: false, error: 'Internal server error' })
   }

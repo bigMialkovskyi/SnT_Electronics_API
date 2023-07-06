@@ -18,22 +18,17 @@ module.exports = async (req, res) => {
         const existSensor = await db.agroGsmSensors.findOne({ identity })
         if (!existSensor) return res.status(400).send({ success: false, error: 'sensor with this identity does not exist' })
 
-        //перевіряємо чи данай деваайс уже підключено до іншого користувача
+        // перевіряємо чи данай деваайс уже підключено до іншого користувача
         if (existSensor.user != existUser.id) return res.status(400).send({ success: false, error: 'only the owner of the sensor can interact with it' })
 
-        // console.log(existSensor.user)
-        // console.log(existUser.id)
-        // console.log(existSensor.user != existUser.id)
+        // перевіряємо чи датчик підключено саме до цього облікового запису.
+        if (existSensor.user == existUser.id) existSensor.name = name
 
-        // перевіряємо чи девайс уже підключено до даного користувача
-        if (existUser.devices.some((id) => { return id.equals(existSensor._id) })) return res.status(400).send({ success: false, error: 'you are already connected to this device' })
+        // чекаємо збереження змін в базі даних
+        await existSensor.save()
 
-        //   existSensor.name = name
-
-        //   await existSensor.save()
-
-        // отправляем информацию о созданом продукте в качестве ответа на запрос
-        res.send({ success: true, message: 'the device is connected to the user profile' })
+        // відправляємо повідомлення в разі успішного зміни імені датчика 
+        res.send({ success: true, message: 'device name changed successfully' })
     } catch (error) {
         console.error(error)
         res.status(500).send({ success: false, error: 'Internal server error' })

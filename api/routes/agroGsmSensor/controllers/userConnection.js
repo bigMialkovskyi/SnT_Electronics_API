@@ -24,6 +24,27 @@ module.exports = async (req, res) => {
     //перевіряємо чи данай деваайс уже підключено до іншого користувача
     if (existSensor.user) return res.status(400).send({ success: false, error: 'this device is already connected to another account' })
 
+    if (!existSensor.measurements.length) {
+      let airTemperature = 0
+      let soilTemperature = 0
+      let humidity = 0
+      let pressure = 0
+      let batteryStatus = 0
+      const updateTime = new Date().toString();
+
+      existSensor.measurements = [
+        {
+          airTemperature,
+          soilTemperature,
+          humidity,
+          pressure,
+          updateTime,
+        },
+        ...existSensor.measurements
+      ]
+      existSensor.batteryStatus = batteryStatus
+    }
+
     existUser.devices = [existSensor._id, ...existUser.devices]
     existSensor.user = existUser._id
     existSensor.name = name
